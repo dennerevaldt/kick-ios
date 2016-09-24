@@ -1,0 +1,79 @@
+PODS:
+  - Alamofire (3.5.0)
+  - AlamofireObjectMapper (3.0.2):
+    - Alamofire (~> 3.2)
+    - ObjectMapper (~> 1.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - DatePickerDialog (1.1.4)
+  - DZNEmptyDataSet (1.8.1)
+  - FacebookCore (0.1.1):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.14)
+  - FacebookLogin (0.1.1):
+    - Bolts (~> 1.8)
+    - FacebookCore
+    - FBSDKCoreKit (~> 4.14)
+    - FBSDKLoginKit (~> 4.14)
+  - FacebookShare (0.1.1):
+    - Bolts (~> 1.8)
+    - FacebookCore
+    - FBSDKCoreKit (~> 4.14)
+    - FBSDKShareKit (~> 4.14)
+  - FBSDKCoreKit (4.15.1):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.15.1):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.15.1):
+    - FBSDKCoreKit
+  - GoogleMaps (1.13.2)
+  - IQKeyboardManagerSwift (4.0.5)
+  - Locksmith (2.0.8)
+  - NVActivityIndicatorView (2.12)
+  - ObjectMapper (1.4.0)
+  - PKHUD (3.2.1)
+  - SCLAlertView (0.6.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireObjectMapper
+  - DatePickerDialog
+  - DZNEmptyDataSet
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
+  - GoogleMaps (= 1.13.2)
+  - IQKeyboardManagerSwift (= 4.0.5)
+  - Locksmith
+  - NVActivityIndicatorView
+  - ObjectMapper
+  - PKHUD
+  - SCLAlertView
+
+SPEC CHECKSUMS:
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  AlamofireObjectMapper: 70f97cbf45c01c48d26aa07a1a7059a60ed7411d
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DatePickerDialog: f23eaadaba1177d7f60ad58a57f81071df856fc9
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FacebookCore: 14f27add6888c27470d42a100374e6361f4e0f79
+  FacebookLogin: 748f4e621e874da3e0bf63bccf6fd1542c786a1b
+  FacebookShare: ea0370ca0b914eccc42a753abcd937265c17b030
+  FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
+  FBSDKLoginKit: 073f79b3b2e762fc6f54a283fe15f45372d59f5f
+  FBSDKShareKit: 11cbb5a4d7b5fda8143cc95b76188147e6725736
+  GoogleMaps: b20a103ff307f58392e603cf142e59d7e30374c1
+  IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
+  Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
+  NVActivityIndicatorView: de8be03826726ad99cdfacf7fe09e88cbfeef911
+  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
+  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
+  SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
+
+PODFILE CHECKSUM: 2494310c48f6ad02aad57e0c02498ad867a9d3fa
+
+COCOAPODS: 1.0.1
