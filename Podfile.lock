@@ -49,10 +49,20 @@ DEPENDENCIES:
   - GoogleMaps (= 1.13.2)
   - IQKeyboardManagerSwift (= 4.0.5)
   - Locksmith
-  - NVActivityIndicatorView
+  - NVActivityIndicatorView (from `https://github.com/ninjaprox/NVActivityIndicatorView.git`, branch `swift2.3`)
   - ObjectMapper
   - PKHUD
   - SCLAlertView
+
+EXTERNAL SOURCES:
+  NVActivityIndicatorView:
+    :branch: swift2.3
+    :git: https://github.com/ninjaprox/NVActivityIndicatorView.git
+
+CHECKOUT OPTIONS:
+  NVActivityIndicatorView:
+    :commit: ac4325492550b9ec9516e3a9b6e28b2c07faa1c6
+    :git: https://github.com/ninjaprox/NVActivityIndicatorView.git
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
@@ -74,6 +84,6 @@ SPEC CHECKSUMS:
   PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
   SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
 
-PODFILE CHECKSUM: 2494310c48f6ad02aad57e0c02498ad867a9d3fa
+PODFILE CHECKSUM: 30dd12e0d66078fc4580461297ecbc17de5a68c6
 
 COCOAPODS: 1.0.1

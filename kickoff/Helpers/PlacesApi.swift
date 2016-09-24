@@ -45,9 +45,9 @@ class PlacesApi {
         }
     }
     
-    func getDetailsForId(placeID:String, completion:(result: GMSPlace)->Void) -> Void {
+    func getDetailsForId(placeID:String, completion:(result: GMSPlace, error: NSError?)->Void) -> Void {
         placesClient?.lookUpPlaceID(placeID, callback: { (place: GMSPlace?, error: NSError?) -> Void in
-            completion(result: place!)
+            completion(result: place!, error: error)
         })
     }
 }

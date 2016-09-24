@@ -12,8 +12,9 @@ import Alamofire
 import AlamofireObjectMapper
 import PKHUD
 import SCLAlertView
+import GoogleMaps
 
-class TabEnterpriseController: UIViewController, UITextFieldDelegate {
+class TabEnterpriseController: UIViewController, UITextFieldDelegate, DestinationViewController {
 
     @IBOutlet weak var nameFull: UITextField!
     @IBOutlet weak var email: UITextField!
@@ -22,6 +23,8 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var telephone: UITextField!
     @IBOutlet weak var cityState: UITextField!
     @IBOutlet weak var scrollViewForm: UIScrollView!
+    
+    var placeItemSelected: GMSPlace?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,19 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate {
         password.delegate = self
         telephone.delegate = self
         cityState.delegate = self
+        
+        setBackItem()
+    }
+    
+    func setBackItem() {
+        var backBtn = UIImage(named: "ic_back")
+        backBtn = backBtn?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.navigationController!.navigationBar.backIndicatorImage = backBtn;
+        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = backBtn;
+        
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        navigationItem.backBarButtonItem = backBarButton
     }
     
     @IBAction func buttonExitToLogin(sender: AnyObject) {
@@ -56,8 +72,8 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate {
                 "email": self.email.text!,
                 "district": self.cityState.text!,
                 "typeperson": "E",
-                "lat": "-29.990",
-                "lng": "-32.443"
+                "lat": "\(placeItemSelected!.coordinate.latitude)",
+                "lng": "\(placeItemSelected!.coordinate.longitude)"
             ]
             Alamofire.request(.POST, URLRequest.URLCreateEnterprise, headers: headers, parameters: parameters)
                 .validate(statusCode: 200..<300)
@@ -103,7 +119,7 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate {
     }
     
     func checkInputs() -> Bool {
-        if user.text != "" && password.text != "" && nameFull.text != "" && telephone.text != "" && email.text != "" && cityState.text != "" {
+        if user.text != "" && password.text != "" && nameFull.text != "" && telephone.text != "" && email.text != "" && cityState.text != "" && placeItemSelected != nil {
             return true
         }
         return false
@@ -118,8 +134,34 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate {
         cityState.text = ""
     }
 
+    // MARK: text fields
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if cityState == textField {
+            self.performSegueWithIdentifier("segueSearchEnterprise", sender: self)
+            return false
+        }
+        return true
+    }
+    
+    // MARK: navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueSearchEnterprise" {
+            let navigationSearch = segue.destinationViewController as! SearchCityTVController
+            navigationSearch.delegate = self
+        }
+    }
+    
+    // MARK: protocolo
+    
+    func setCordinates(placeSelected: GMSPlace) {
+        placeItemSelected = placeSelected
+        cityState.text = placeSelected.formattedAddress
     }
 }

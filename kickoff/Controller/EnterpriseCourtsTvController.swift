@@ -18,6 +18,7 @@ import PKHUD
 class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     private var isLoading = Bool()
     private var courtsList: Array<Court> = Array<Court>()
+    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
                 if let courtArray = courtArray {
                     self.courtsList = courtArray
                     
-                    self.isLoading = true
+                    self.isLoading = false
                     self.tableView.reloadData()
                     self.refreshControl!.endRefreshing()
                 }
@@ -165,16 +166,12 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     
     // MARK: ActivityIndicatorView Methods
     func addActivityIndicatorView() -> UIView {
-        let size: CGFloat = 44
-        let x = (self.view.bounds.width - size) / 2
-        let y: CGFloat = 0
-        let loadingView = UIView(frame: CGRect(x: x, y: y, width: size, height: size))
-        let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
-        activityIndicatorView.center = loadingView.center
-        activityIndicatorView.color = UIColor.lightGrayColor()
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicatorView.startAnimating()
-        loadingView.addSubview(activityIndicatorView)
-        return loadingView
+        loading.color = UIColor.grayColor()
+        loading.center = self.view.center
+        self.view.addSubview(loading)
+        loading.bringSubviewToFront(self.view)
+        loading.startAnimating()
+        
+        return loading
     }
 }

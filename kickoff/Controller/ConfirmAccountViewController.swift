@@ -12,8 +12,9 @@ import PKHUD
 import Alamofire
 import ObjectMapper
 import Locksmith
+import GoogleMaps
 
-class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, DestinationViewController {
     
     var idConfirm: String!
     var nameConfirm: String!
@@ -27,6 +28,7 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var uiPickerView: UIPickerView!
     
     var pickerData: [String] = [String]()
+    var placeItemSelected: GMSPlace?
     
     @IBAction func btnClose(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -42,11 +44,28 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.uiPickerView.delegate = self
         self.uiPickerView.dataSource = self
         
+        textFieldUser.delegate = self
+        textFieldVariable.delegate = self
+        textFieldCityState.delegate = self
+        
         // Input data into the Array:
         pickerData = ["Empresa", "Jogador"]
         
         // Init placeholder
         textFieldVariable.placeholder = "Telefone"
+        
+        setBackItem()
+    }
+    
+    func setBackItem() {
+        var backBtn = UIImage(named: "ic_back")
+        backBtn = backBtn?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.navigationController!.navigationBar.backIndicatorImage = backBtn;
+        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = backBtn;
+        
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        navigationItem.backBarButtonItem = backBarButton
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,10 +134,10 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
                 "fullname": self.nameConfirm,
                 "telephone": textFieldVariable.text!,
                 "email": self.emailConfirm,
-                "district": "Torres-RS, Brasil",
+                "district": textFieldCityState.text!,
                 "typeperson": "E",
-                "lat": "-29.990",
-                "lng": "-32.443"
+                "lat": "\(placeItemSelected!.coordinate.latitude)",
+                "lng": "\(placeItemSelected!.coordinate.longitude)"
             ]
             Alamofire.request(.POST, URLRequest.URLCreateEnterprise, headers: headers, parameters: parameters)
                 .validate(statusCode: 200..<300)
@@ -163,10 +182,10 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
                 "fullname": self.nameConfirm,
                 "position": textFieldVariable.text!,
                 "email": self.emailConfirm,
-                "district": "Torres-RS, Brasil",
+                "district": textFieldCityState.text!,
                 "typeperson": "E",
-                "lat": "-29.990",
-                "lng": "-32.443"
+                "lat": "\(placeItemSelected!.coordinate.latitude)",
+                "lng": "\(placeItemSelected!.coordinate.longitude)"
             ]
             Alamofire.request(.POST, URLRequest.URLCreatePlayer, headers: headers, parameters: parameters)
                 .validate(statusCode: 200..<300)
@@ -200,7 +219,7 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func checkInputs() -> Bool {
-        if textFieldUser.text != "" && textFieldVariable.text != "" {
+        if textFieldUser.text != "" && textFieldVariable.text != "" && placeItemSelected != nil {
             return true
         }
         return false
@@ -277,5 +296,36 @@ class ConfirmAccountViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func setCredentials(name: String, token: String, email: String, typeUser: String) -> Void {
         KeychainManager.saveCredentials(name, email: email, token: token, typeUser: typeUser)
+    }
+    
+    // MARK: text fields
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if textFieldCityState == textField {
+            self.performSegueWithIdentifier("segueSearchConfirmAc", sender: self)
+            return false
+        }
+        return true
+    }
+    
+    // MARK: navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueSearchConfirmAc" {
+            let navigationSearch = segue.destinationViewController as! SearchCityTVController
+            navigationSearch.delegate = self
+        }
+    }
+    
+    // MARK: protocolo
+    
+    func setCordinates(placeSelected: GMSPlace) {
+        placeItemSelected = placeSelected
+        textFieldCityState.text = placeSelected.formattedAddress
     }
 }

@@ -34,10 +34,10 @@ class TabPlayerController: UIViewController, UITextFieldDelegate, DestinationVie
         self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat(76.0/255.0), green: CGFloat(175.0/255.0), blue: CGFloat(80.0/255.0), alpha: CGFloat(1.0))
         
         nameFull.delegate = self
-//        email.delegate = self
-//        user.delegate = self
-//        password.delegate = self
-//        position.delegate = self
+        email.delegate = self
+        user.delegate = self
+        password.delegate = self
+        position.delegate = self
         cityState.delegate = self
         
         setBackItem()
@@ -72,8 +72,8 @@ class TabPlayerController: UIViewController, UITextFieldDelegate, DestinationVie
                 "email": self.email.text!,
                 "district": self.cityState.text!,
                 "typeperson": "P",
-                "lat": "\(placeItemSelected?.coordinate.latitude)",
-                "lng": "\(placeItemSelected?.coordinate.longitude)"
+                "lat": "\(placeItemSelected!.coordinate.latitude)",
+                "lng": "\(placeItemSelected!.coordinate.longitude)"
             ]
             Alamofire.request(.POST, URLRequest.URLCreatePlayer, headers: headers, parameters: parameters)
                 .validate(statusCode: 200..<300)
@@ -142,7 +142,7 @@ class TabPlayerController: UIViewController, UITextFieldDelegate, DestinationVie
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if cityState == textField {
-            self.performSegueWithIdentifier("segueSearch", sender: self)
+            self.performSegueWithIdentifier("segueSearchPlayer", sender: self)
             return false
         }
         return true
@@ -151,7 +151,7 @@ class TabPlayerController: UIViewController, UITextFieldDelegate, DestinationVie
     // MARK: navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "segueSearch" {
+        if segue.identifier == "segueSearchPlayer" {
             let navigationSearch = segue.destinationViewController as! SearchCityTVController
             navigationSearch.delegate = self
         }
@@ -163,5 +163,4 @@ class TabPlayerController: UIViewController, UITextFieldDelegate, DestinationVie
         placeItemSelected = placeSelected
         cityState.text = placeSelected.formattedAddress
     }
-    
 }
