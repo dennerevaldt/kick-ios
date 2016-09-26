@@ -31,6 +31,7 @@
 		537C13671D8AE38C00C071E5 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537C13661D8AE38C00C071E5 /* ProfileTableViewController.swift */; };
 		537C137E1D8B2EDE00C071E5 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537C137D1D8B2EDE00C071E5 /* KeychainManager.swift */; };
 		5388CFD81D8886240037A94B /* ErrorApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5388CFD71D8886240037A94B /* ErrorApi.swift */; };
+		53C7A05B1D99931A00B1FE70 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7A05A1D99931A00B1FE70 /* MessageAlert.swift */; };
 		53D6E0D21D8791D0001A8040 /* Court.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D6E0D11D8791D0001A8040 /* Court.swift */; };
 		53D6E0E51D8791E3001A8040 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D6E0E41D8791E3001A8040 /* Game.swift */; };
 		53D6E0E71D879577001A8040 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D6E0E61D879577001A8040 /* Schedule.swift */; };
@@ -237,6 +238,7 @@
 		537C13661D8AE38C00C071E5 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		537C137D1D8B2EDE00C071E5 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		5388CFD71D8886240037A94B /* ErrorApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorApi.swift; sourceTree = "<group>"; };
+		53C7A05A1D99931A00B1FE70 /* MessageAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAlert.swift; sourceTree = "<group>"; };
 		53D6E0D11D8791D0001A8040 /* Court.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Court.swift; sourceTree = "<group>"; };
 		53D6E0E41D8791E3001A8040 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		53D6E0E61D879577001A8040 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				53D6E0E91D883B07001A8040 /* Util.swift */,
 				537C137D1D8B2EDE00C071E5 /* KeychainManager.swift */,
 				536A0D481D95F41C00305623 /* PlacesApi.swift */,
+				53C7A05A1D99931A00B1FE70 /* MessageAlert.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1055,6 +1058,7 @@
 				536301311D7DDDE400BD9B69 /* URL.swift in Sources */,
 				537392611D673998007EE58C /* AppDelegate.swift in Sources */,
 				5377C0311D994DEC006F9222 /* CourtAPI.swift in Sources */,
+				53C7A05B1D99931A00B1FE70 /* MessageAlert.swift in Sources */,
 				537C137E1D8B2EDE00C071E5 /* KeychainManager.swift in Sources */,
 				53E07F451D67A15C00C55E31 /* ViewController.swift in Sources */,
 				53D6E0FD1D88422F001A8040 /* EnterpriseNewScheduleController.swift in Sources */,

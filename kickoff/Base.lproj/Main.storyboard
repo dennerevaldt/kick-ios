@@ -252,6 +252,9 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aUH-fV-Yve">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <segue destination="qzY-Vo-xR1" kind="show" identifier="segueEditCourt" id="Xgh-Zy-BDI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fos-If-T5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1365,9 +1368,10 @@
         <image name="logo_100" width="100" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2CE-iw-wOe"/>
         <segue reference="CCu-DG-9iP"/>
+        <segue reference="2CE-iw-wOe"/>
         <segue reference="g0h-Vx-GBn"/>
         <segue reference="WD1-40-foE"/>
+        <segue reference="Xgh-Zy-BDI"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,16 +10,15 @@ import UIKit
 import DZNEmptyDataSet
 import Locksmith
 import NVActivityIndicatorView
-import ObjectMapper
-import Alamofire
-import AlamofireObjectMapper
 import PKHUD
+import SCLAlertView
 
 class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, CourtDestinationViewController {
     
     private var isLoading = Bool()
     private var courtsList: Array<Court> = Array<Court>()
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
+    var courtSelected: Court?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,22 +40,18 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     }
     
     func loadList() {
-        let headers = [
-            "x-access-token": KeychainManager.getToken(),
-            "Accept": "application/json"
-        ]
-        Alamofire.request(.GET, URLRequest.URLCourtsEnterprise, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseArray { (response: Response<[Court], NSError>) in
-                let courtArray = response.result.value
-                
-                if let courtArray = courtArray {
-                    self.courtsList = courtArray
-                    
-                    self.isLoading = false
-                    self.tableView.reloadData()
-                    self.refreshControl!.endRefreshing()
-                }
+        let courtAPI = CourtAPI()
+        
+        courtAPI.getAll(){(result, error) -> Void in
+            self.isLoading = false
+            self.refreshControl!.endRefreshing()
+            
+            if error == nil {
+                self.courtsList = result
+                self.tableView.reloadData()
+            } else {
+                MessageAlert.error("Não foi possível buscar quadras registradas, tente novamente.")
+            }
         }
     }
     
@@ -92,26 +87,24 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         return true
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        courtSelected = courtsList[indexPath.row]
+        self.performSegueWithIdentifier("segueEditCourt", sender: self)
+    }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
             HUD.show(.Progress)
-            let id = courtsList[indexPath.row].idCourt!
-            
-            let headers = [
-                "x-access-token": KeychainManager.getToken(),
-                "Accept": "application/json"
-            ]
-            Alamofire.request(.DELETE, URLRequest.URLCourtsEnterprise + "/\(id)", headers: headers)
-                .validate(statusCode: 200..<300)
-                .responseJSON { response in
-                    HUD.hide()
-                    switch response.result {
-                    case .Success:
-                        self.loadList()
-                    case .Failure(let error):
-                        print(error)
-                    }
+            let id = courtsList[indexPath.row].idCourt! 
+
+            let courtAPI = CourtAPI()
+            courtAPI.delete(id) { (result) -> Void in
+                HUD.hide()
+                if result {
+                    self.loadList()
+                } else {
+                    MessageAlert.error("Problemas ao deletar quadra.")
+                }
             }
         }
     }
@@ -170,11 +163,17 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     }
     
     // MARK: navigation
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueNewCourt" {
             let destinationNavigationController = segue.destinationViewController as! UINavigationController
             let targetController = destinationNavigationController.topViewController as! EnterpriseNewCourtController
+            targetController.delegate = self
+        }
+        
+        if segue.identifier == "segueEditCourt" {
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! EnterpriseNewCourtController
+            targetController.court = courtSelected
             targetController.delegate = self
         }
     }

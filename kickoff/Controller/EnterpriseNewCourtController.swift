@@ -22,9 +22,20 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
     var pickerData: [String] = [String]()
     var categoryCourtSelected: String = "Futebol society (7)"
     var delegate: CourtDestinationViewController! = nil
+    var court: Court? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let courtWrapper = court {
+            textFieldNameCourt.text = courtWrapper.name!
+            
+            if courtWrapper.category == "Futebol society (7)" {
+                pickerViewCategoryCourt.selectRow(0, inComponent: 0, animated: true)
+            } else {
+                pickerViewCategoryCourt.selectRow(1, inComponent: 0, animated: true)
+            }
+        }
         
         // Connect data:
         self.pickerViewCategoryCourt.delegate = self
@@ -37,20 +48,34 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
     @IBAction func createCourt(sender: AnyObject) {
         if self.checkInputs() {
             HUD.show(.Progress)
-            let court = Court(name: textFieldNameCourt.text!, category: categoryCourtSelected)
-            
             let courtAPI = CourtAPI()
             
-            courtAPI.create(court) {(result) -> Void in
-                HUD.hide(animated: true)
-                if result {
-                    print("created")
-                    self.delegate.setNewCourt(true)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                } else {
-                    print("error")
+            if self.court == nil {
+                let court = Court(name: textFieldNameCourt.text!, category: categoryCourtSelected)
+                
+                courtAPI.create(court) {(result) -> Void in
+                    HUD.hide(animated: true)
+                    if result {
+                        self.delegate.setNewCourt(true)
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        MessageAlert.error("Problema ao cadastrar nova quadra, tente novamente.")
+                    }
+                }
+            } else {
+                let court = Court(id: (self.court?.idCourt)!, name: textFieldNameCourt.text!, category:categoryCourtSelected)
+                
+                courtAPI.edit(court) {(result) -> Void in
+                    HUD.hide()
+                    if result {
+                        self.delegate.setNewCourt(true)
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        MessageAlert.error("Problema ao editar quadra, tente novamente.")
+                    }
                 }
             }
+            
         }
     }
     
