@@ -20,6 +20,11 @@ class Court: Mappable {
         
     }
     
+    init(name:String, category:String) {
+        self.name = name
+        self.category = category
+    }
+    
     // Mappable
     func mapping(map: Map) {
         idCourt <- map["id"]

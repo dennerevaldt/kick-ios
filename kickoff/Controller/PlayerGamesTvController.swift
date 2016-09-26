@@ -17,7 +17,7 @@ import PKHUD
 class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     private var isLoading = Bool()
     private var gamesList: Array<Game> = Array<Game>()
-    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
+    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0, 0, 44, 44), type: .LineScale)
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -245,7 +245,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_add_white" id="ijV-pT-mIa">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="qzY-Vo-xR1" kind="show" id="TFC-JU-tXK"/>
+                                <segue destination="qzY-Vo-xR1" kind="show" identifier="segueNewCourt" id="TFC-JU-tXK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -275,25 +275,19 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vJ-A5-SsL">
-                                <rect key="frame" x="0.0" y="110" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="103" width="600" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="zUr-Kz-Pg8"/>
+                                </constraints>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGV-lz-ofs">
-                                <rect key="frame" x="279" y="334" width="43" height="30"/>
-                                <state key="normal" title="Salvar">
-                                    <color key="titleColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="u88-dj-F7c" secondAttribute="leading" id="9Nb-nc-2Ck"/>
-                            <constraint firstItem="AGV-lz-ofs" firstAttribute="leading" secondItem="dhz-9B-23f" secondAttribute="leadingMargin" constant="259" id="DHU-1F-vi1"/>
-                            <constraint firstItem="7vJ-A5-SsL" firstAttribute="top" secondItem="u88-dj-F7c" secondAttribute="bottom" constant="8" id="EWS-iQ-7pC"/>
-                            <constraint firstItem="7vJ-A5-SsL" firstAttribute="leading" secondItem="dhz-9B-23f" secondAttribute="leadingMargin" constant="-20" id="G75-ci-8yJ"/>
-                            <constraint firstItem="AGV-lz-ofs" firstAttribute="top" secondItem="7vJ-A5-SsL" secondAttribute="bottom" constant="8" id="HPT-X1-KYS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AGV-lz-ofs" secondAttribute="trailing" constant="258" id="VR9-cY-LZq"/>
+                            <constraint firstItem="7vJ-A5-SsL" firstAttribute="leading" secondItem="dhz-9B-23f" secondAttribute="leading" id="BSt-kC-hi7"/>
+                            <constraint firstItem="7vJ-A5-SsL" firstAttribute="centerX" secondItem="u88-dj-F7c" secondAttribute="centerX" id="IQJ-nh-fqY"/>
                             <constraint firstItem="u88-dj-F7c" firstAttribute="top" secondItem="zU3-VF-GrH" secondAttribute="bottom" constant="8" id="ccW-LZ-sbC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7vJ-A5-SsL" secondAttribute="trailing" constant="-20" id="oW5-Yb-sJq"/>
+                            <constraint firstItem="7vJ-A5-SsL" firstAttribute="top" secondItem="u88-dj-F7c" secondAttribute="bottom" constant="1" id="dcR-DM-dmd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u88-dj-F7c" secondAttribute="trailing" id="rqc-YA-NSG"/>
                         </constraints>
                     </view>
@@ -304,7 +298,17 @@
                                 <action selector="btnClose:" destination="ilH-Wt-VLS" id="wlW-X0-ytV"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ic_done_white" id="rN3-oc-XYv">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createCourt:" destination="ilH-Wt-VLS" id="Jnh-BS-tRP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pickerViewCategoryCourt" destination="7vJ-A5-SsL" id="zTc-7h-21A"/>
+                        <outlet property="textFieldNameCourt" destination="u88-dj-F7c" id="pzX-Nn-517"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePG-bB-Bkl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

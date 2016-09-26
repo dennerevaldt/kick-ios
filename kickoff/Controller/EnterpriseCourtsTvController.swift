@@ -15,7 +15,8 @@ import Alamofire
 import AlamofireObjectMapper
 import PKHUD
 
-class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, CourtDestinationViewController {
+    
     private var isLoading = Bool()
     private var courtsList: Array<Court> = Array<Court>()
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
@@ -33,6 +34,10 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         customizeDZNEmptyDataSet()
         isLoading = true
         self.loadList()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
     }
     
     func loadList() {
@@ -164,6 +169,16 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         return true
     }
     
+    // MARK: navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueNewCourt" {
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! EnterpriseNewCourtController
+            targetController.delegate = self
+        }
+    }
+    
     // MARK: ActivityIndicatorView Methods
     func addActivityIndicatorView() -> UIView {
         loading.color = UIColor.grayColor()
@@ -173,5 +188,12 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         loading.startAnimating()
         
         return loading
+    }
+    
+    // MARK: protocol court
+    func setNewCourt(result: Bool) {
+        if result {
+            self.loadList()
+        }
     }
 }

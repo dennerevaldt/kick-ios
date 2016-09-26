@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var name: String = ""
     var email: String = ""
     var id: String = ""
+    let loginManager = LoginManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func btnLoginFacebook(sender: AnyObject) {
-        let loginManager = LoginManager()
         loginManager.logIn([.PublicProfile, .Email], viewController: self) { loginResult in
             switch loginResult {
             case .Success( _, _, let accessToken):
