@@ -33,10 +33,22 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         customizeDZNEmptyDataSet()
         isLoading = true
         self.loadList()
+        setBackItem()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+    }
+    
+    func setBackItem() {
+        var backBtn = UIImage(named: "ic_back")
+        backBtn = backBtn?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.navigationController!.navigationBar.backIndicatorImage = backBtn;
+        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = backBtn;
+        
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        navigationItem.backBarButtonItem = backBarButton
     }
     
     func loadList() {
@@ -92,21 +104,30 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         self.performSegueWithIdentifier("segueEditCourt", sender: self)
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .Default, title: "Excluir")
+        { (action, indexPath) -> Void in
             HUD.show(.Progress)
-            let id = courtsList[indexPath.row].idCourt! 
-
+            
+            let id = self.courtsList[indexPath.row].idCourt!
+            
             let courtAPI = CourtAPI()
             courtAPI.delete(id) { (result) -> Void in
                 HUD.hide()
                 if result {
-                    self.loadList()
+                    self.courtsList.removeAtIndex(indexPath.row)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    
+                    if self.courtsList.count == 0 {
+                        tableView.reloadData()
+                    }
                 } else {
                     MessageAlert.error("Problemas ao deletar quadra.")
                 }
             }
         }
+        return [delete]
     }
     
     // MARK: DZNEmptyDataSetSource Methods
@@ -165,16 +186,14 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     // MARK: navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueNewCourt" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! EnterpriseNewCourtController
-            targetController.delegate = self
+            let destination = segue.destinationViewController as! EnterpriseNewCourtController
+            destination.delegate = self
         }
         
         if segue.identifier == "segueEditCourt" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! EnterpriseNewCourtController
-            targetController.court = courtSelected
-            targetController.delegate = self
+            let destination = segue.destinationViewController as! EnterpriseNewCourtController
+            destination.delegate = self
+            destination.court = courtSelected
         }
     }
     
@@ -190,9 +209,7 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     }
     
     // MARK: protocol court
-    func setNewCourt(result: Bool) {
-        if result {
-            self.loadList()
-        }
+    func setNewCourt() {
+        self.loadList()
     }
 }

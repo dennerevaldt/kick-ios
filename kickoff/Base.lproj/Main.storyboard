@@ -245,7 +245,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_add_white" id="ijV-pT-mIa">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="qzY-Vo-xR1" kind="show" identifier="segueNewCourt" id="TFC-JU-tXK"/>
+                                <segue destination="ilH-Wt-VLS" kind="show" identifier="segueNewCourt" id="aeD-mj-Vud"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -253,17 +253,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="qzY-Vo-xR1" kind="show" identifier="segueEditCourt" id="Xgh-Zy-BDI"/>
+                        <segue destination="ilH-Wt-VLS" kind="show" identifier="segueEditCourt" id="ef9-DF-c0M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fos-If-T5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3457" y="-2663"/>
         </scene>
-        <!--Nova quadra-->
+        <!--Quadra-->
         <scene sceneID="ERr-l7-3g7">
             <objects>
-                <viewController id="ilH-Wt-VLS" customClass="EnterpriseNewCourtController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="ilH-Wt-VLS" customClass="EnterpriseNewCourtController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zU3-VF-GrH"/>
                         <viewControllerLayoutGuide type="bottom" id="oBZ-Ry-vcH"/>
@@ -294,13 +294,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="u88-dj-F7c" secondAttribute="trailing" id="rqc-YA-NSG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Nova quadra" id="I3r-FV-FaO">
-                        <barButtonItem key="leftBarButtonItem" image="ic_close_white" id="Zri-JS-ycd">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="btnClose:" destination="ilH-Wt-VLS" id="wlW-X0-ytV"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Quadra" id="I3r-FV-FaO">
                         <barButtonItem key="rightBarButtonItem" image="ic_done_white" id="rN3-oc-XYv">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -315,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePG-bB-Bkl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5065" y="-2663"/>
+            <point key="canvasLocation" x="4341" y="-2663"/>
         </scene>
         <!--Horários-->
         <scene sceneID="LU6-ow-G1b">
@@ -1265,28 +1259,6 @@
             <point key="canvasLocation" x="5101" y="-1922"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="iLs-Rb-W1S">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qzY-Vo-xR1" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CYH-5v-jhX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ilH-Wt-VLS" kind="relationship" relationship="rootViewController" id="XF7-e5-FVA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e76-dn-7Rg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4289" y="-2663"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="bEK-j0-Ube">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="23N-ko-bCY" sceneMemberID="viewController">
@@ -1372,6 +1344,6 @@
         <segue reference="2CE-iw-wOe"/>
         <segue reference="g0h-Vx-GBn"/>
         <segue reference="WD1-40-foE"/>
-        <segue reference="Xgh-Zy-BDI"/>
+        <segue reference="aeD-mj-Vud"/>
     </inferredMetricsTieBreakers>
 </document>

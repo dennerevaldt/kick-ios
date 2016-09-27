@@ -11,13 +11,25 @@ import SCLAlertView
 
 class MessageAlert {
     
-    static func error (message: String) -> Void {
+    static func error(message: String) -> Void {
         SCLAlertView().showTitle(
             "Ops",
             subTitle: message,
             duration: nil,
             completeText: "OK",
             style: .Error,
+            colorStyle: nil,
+            colorTextButton: nil
+        )
+    }
+    
+    static func warning(message: String) -> Void {
+        SCLAlertView().showTitle(
+            "Atenção",
+            subTitle: message,
+            duration: nil,
+            completeText: "OK",
+            style: .Warning,
             colorStyle: nil,
             colorTextButton: nil
         )

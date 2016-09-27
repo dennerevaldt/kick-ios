@@ -11,7 +11,7 @@ import SCLAlertView
 import PKHUD
 
 protocol CourtDestinationViewController {
-    func setNewCourt(result: Bool)
+    func setNewCourt()
 }
 
 class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -27,6 +27,13 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Connect data:
+        self.pickerViewCategoryCourt.delegate = self
+        self.pickerViewCategoryCourt.dataSource = self
+        
+        // Input data into the Array:
+        pickerData = ["Futebol society (7)", "Futebol de salão (Futsal)"]
+        
         if let courtWrapper = court {
             textFieldNameCourt.text = courtWrapper.name!
             
@@ -35,14 +42,11 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
             } else {
                 pickerViewCategoryCourt.selectRow(1, inComponent: 0, animated: true)
             }
+            
+            self.title = "Editar quadra"
+        } else {
+            self.title = "Nova quadra"
         }
-        
-        // Connect data:
-        self.pickerViewCategoryCourt.delegate = self
-        self.pickerViewCategoryCourt.dataSource = self
-        
-        // Input data into the Array:
-        pickerData = ["Futebol society (7)", "Futebol de salão (Futsal)"]
     }
     
     @IBAction func createCourt(sender: AnyObject) {
@@ -56,8 +60,8 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
                 courtAPI.create(court) {(result) -> Void in
                     HUD.hide(animated: true)
                     if result {
-                        self.delegate.setNewCourt(true)
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.delegate.setNewCourt()
+                        self.navigationController?.popViewControllerAnimated(true)
                     } else {
                         MessageAlert.error("Problema ao cadastrar nova quadra, tente novamente.")
                     }
@@ -68,14 +72,15 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
                 courtAPI.edit(court) {(result) -> Void in
                     HUD.hide()
                     if result {
-                        self.delegate.setNewCourt(true)
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.delegate.setNewCourt()
+                        self.navigationController?.popViewControllerAnimated(true)
                     } else {
                         MessageAlert.error("Problema ao editar quadra, tente novamente.")
                     }
                 }
             }
-            
+        } else {
+            MessageAlert.warning("Preencha os campos corretamente.")
         }
     }
     
