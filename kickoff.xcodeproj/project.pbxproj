@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52711624521EB950B63448B7 /* Pods_kickoffUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079FCD499B0A2544AFF0434A /* Pods_kickoffUITests.framework */; };
+		5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532552291D9B5FA100469B96 /* ScheduleAPI.swift */; };
 		5347FDAB1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */; };
 		5347FDBD1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */; };
 		536301171D7A499D00BD9B69 /* PlayerGamesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536301161D7A499D00BD9B69 /* PlayerGamesTvController.swift */; };
@@ -208,6 +209,7 @@
 		079FCD499B0A2544AFF0434A /* Pods_kickoffUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kickoffUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D463984A8125D15F2AE9BF /* Pods-kickoff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kickoff/Pods-kickoff.debug.xcconfig"; sourceTree = "<group>"; };
 		4593FC1A89CCD018A5340173 /* Pods-kickoffUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoffUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-kickoffUITests/Pods-kickoffUITests.release.xcconfig"; sourceTree = "<group>"; };
+		532552291D9B5FA100469B96 /* ScheduleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseSchedulesTvController.swift; sourceTree = "<group>"; };
 		5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseNotificationsTvController.swift; sourceTree = "<group>"; };
 		534C8435BED6842F4C549155 /* Pods-kickoffUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoffUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kickoffUITests/Pods-kickoffUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				5377C0301D994DEC006F9222 /* CourtAPI.swift */,
+				532552291D9B5FA100469B96 /* ScheduleAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -1060,6 +1063,7 @@
 				5377C0311D994DEC006F9222 /* CourtAPI.swift in Sources */,
 				53C7A05B1D99931A00B1FE70 /* MessageAlert.swift in Sources */,
 				537C137E1D8B2EDE00C071E5 /* KeychainManager.swift in Sources */,
+				5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */,
 				53E07F451D67A15C00C55E31 /* ViewController.swift in Sources */,
 				53D6E0FD1D88422F001A8040 /* EnterpriseNewScheduleController.swift in Sources */,
 				5363011B1D7A527B00BD9B69 /* PlayerGamesNearTvController.swift in Sources */,

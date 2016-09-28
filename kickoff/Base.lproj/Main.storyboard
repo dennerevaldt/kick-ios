@@ -9,7 +9,7 @@
         <!--Novo horário-->
         <scene sceneID="xOv-aT-Alm">
             <objects>
-                <viewController id="TYk-7P-EAt" customClass="EnterpriseNewScheduleController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="TYk-7P-EAt" customClass="EnterpriseNewScheduleController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qs7-K4-zzX"/>
                         <viewControllerLayoutGuide type="bottom" id="2s3-8Q-1b7"/>
@@ -32,47 +32,42 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFq-wF-NO0">
-                                <rect key="frame" x="0.0" y="148" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="148" width="600" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="tkk-ul-8Ch"/>
+                                </constraints>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugT-0j-pI5">
-                                <rect key="frame" x="279" y="372" width="43" height="30"/>
-                                <state key="normal" title="Salvar">
-                                    <color key="titleColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="DNm-3L-YeD" secondAttribute="trailing" id="0Qr-wk-rYs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ugT-0j-pI5" secondAttribute="trailing" constant="258" id="83z-0b-CjH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mFq-wF-NO0" secondAttribute="trailing" constant="-20" id="IXx-Ej-hDj"/>
-                            <constraint firstItem="ugT-0j-pI5" firstAttribute="top" secondItem="mFq-wF-NO0" secondAttribute="bottom" constant="8" id="Off-Sg-0BO"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="leading" secondItem="jFb-c2-HLJ" secondAttribute="leading" id="91X-LD-fhM"/>
                             <constraint firstAttribute="leadingMargin" secondItem="BvM-oo-MjU" secondAttribute="leading" id="UZY-bJ-t1M"/>
                             <constraint firstItem="DNm-3L-YeD" firstAttribute="top" secondItem="Qs7-K4-zzX" secondAttribute="bottom" constant="8" id="VvK-wH-6l3"/>
-                            <constraint firstItem="mFq-wF-NO0" firstAttribute="leading" secondItem="jFb-c2-HLJ" secondAttribute="leadingMargin" constant="-20" id="f0q-IX-QRX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BvM-oo-MjU" secondAttribute="trailing" id="fL7-Tc-9FD"/>
-                            <constraint firstItem="ugT-0j-pI5" firstAttribute="leading" secondItem="jFb-c2-HLJ" secondAttribute="leadingMargin" constant="259" id="u8d-Fm-o5q"/>
-                            <constraint firstItem="mFq-wF-NO0" firstAttribute="top" secondItem="BvM-oo-MjU" secondAttribute="bottom" constant="8" id="weL-Hm-1jb"/>
                             <constraint firstItem="BvM-oo-MjU" firstAttribute="top" secondItem="DNm-3L-YeD" secondAttribute="bottom" constant="8" id="xFs-an-PwS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="DNm-3L-YeD" secondAttribute="leading" id="xm8-5d-3ol"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="centerX" secondItem="BvM-oo-MjU" secondAttribute="centerX" id="yxh-ey-Xkk"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="top" secondItem="BvM-oo-MjU" secondAttribute="bottom" constant="8" symbolic="YES" id="z3U-o9-KPz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Novo horário" id="skc-sU-Jsl">
-                        <barButtonItem key="leftBarButtonItem" image="ic_close_white" id="k3M-2e-atO">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="ic_done_white" id="CRU-02-a8G">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="btnClose:" destination="TYk-7P-EAt" id="gbL-kX-RNI"/>
+                                <action selector="btnSaveSchedule:" destination="TYk-7P-EAt" id="2t5-qE-qmp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="textFieldDate" destination="DNm-3L-YeD" id="VIv-uR-NBp"/>
                         <outlet property="textFieldHour" destination="BvM-oo-MjU" id="dXJ-lf-GOC"/>
+                        <outlet property="uiPickerCourts" destination="mFq-wF-NO0" id="DxT-gi-GuB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52C-F7-yrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5877" y="-1922"/>
+            <point key="canvasLocation" x="5115" y="-1922"/>
         </scene>
         <!--Perfil-->
         <scene sceneID="c93-7w-bkj">
@@ -354,13 +349,16 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_add_white" id="4Gs-So-eUc">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="KMd-aX-2Lq" kind="show" id="Va8-3T-4Hw"/>
+                                <segue destination="TYk-7P-EAt" kind="show" identifier="segueNewSchedule" id="GuD-Pu-ugf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xSS-yK-cuM">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <segue destination="TYk-7P-EAt" kind="show" identifier="segueEditSchedule" id="MeH-kk-g0l"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87A-FE-CON" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1237,28 +1235,6 @@
             <point key="canvasLocation" x="3477" y="-1166"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="gAY-c3-IdM">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KMd-aX-2Lq" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="St6-hT-o6h">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="TYk-7P-EAt" kind="relationship" relationship="rootViewController" id="MNc-nX-CTi"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dIO-eM-uFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5101" y="-1922"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="bEK-j0-Ube">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="23N-ko-bCY" sceneMemberID="viewController">
@@ -1341,9 +1317,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CCu-DG-9iP"/>
-        <segue reference="2CE-iw-wOe"/>
         <segue reference="g0h-Vx-GBn"/>
+        <segue reference="2CE-iw-wOe"/>
         <segue reference="WD1-40-foE"/>
+        <segue reference="MeH-kk-g0l"/>
         <segue reference="aeD-mj-Vud"/>
     </inferredMetricsTieBreakers>
 </document>

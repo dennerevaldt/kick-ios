@@ -1,27 +1,32 @@
 //
-//  EnterpriseAPI.swift
+//  ScheduleAPI.swift
 //  kickoff
 //
-//  Created by Denner Evaldt on 26/09/16.
+//  Created by Denner Evaldt on 27/09/16.
 //  Copyright © 2016 Denner Evaldt. All rights reserved.
 //
 
 import UIKit
 import Alamofire
+import AlamofireObjectMapper
 import ObjectMapper
 
-class CourtAPI {
-    
-    func create(court: Court, completion:(result: Bool)->Void) -> Void {
+class ScheduleAPI {
+    func create(schedule: Schedule, completion:(result: Bool)->Void) -> Void {
         let headers = [
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
+        var idcourt = 0
+        if let court = schedule.court?.idCourt {
+            idcourt = court
+        }
         let parameters : [ String : String] = [
-            "name": court.name!,
-            "category": court.category!
+            "date": schedule.date!,
+            "horary": schedule.horary!,
+            "court_id": "\(idcourt)"
         ]
-        Alamofire.request(.POST, URLRequest.URLCourtsEnterprise, headers: headers, parameters: parameters)
+        Alamofire.request(.POST, URLRequest.URLSchedulesEnterprise, headers: headers, parameters: parameters)
             .validate()
             .responseJSON{ response in
                 if response.result.isSuccess {
@@ -32,16 +37,17 @@ class CourtAPI {
         }
     }
     
-    func edit(court: Court, completion:(result: Bool)->Void) -> Void {
+    func edit(schedule: Schedule, completion:(result: Bool)->Void) -> Void {
         let headers = [
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
         let parameters : [ String : String] = [
-            "name": court.name!,
-            "category": court.category!
+            "date": schedule.date!,
+            "horary": schedule.horary!,
+            "court_id": "\(schedule.court?.idCourt!)"
         ]
-        Alamofire.request(.PUT, URLRequest.URLCourtsEnterprise + "/\(court.idCourt!)", headers: headers, parameters: parameters)
+        Alamofire.request(.PUT, URLRequest.URLSchedulesEnterprise + "/\(schedule.idSchedule!)", headers: headers, parameters: parameters)
             .validate()
             .responseJSON{ response in
                 if response.result.isSuccess {
@@ -52,12 +58,12 @@ class CourtAPI {
         }
     }
     
-    func delete(idCourt: Int, completion:(result: Bool)->Void) -> Void {
+    func delete(idSchedule: Int, completion:(result: Bool)->Void) -> Void {
         let headers = [
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
-        Alamofire.request(.DELETE, URLRequest.URLCourtsEnterprise + "/\(idCourt)", headers: headers)
+        Alamofire.request(.DELETE, URLRequest.URLSchedulesEnterprise + "/\(idSchedule)", headers: headers)
             .validate()
             .responseJSON { response in
                 if response.result.isSuccess {
@@ -68,20 +74,20 @@ class CourtAPI {
         }
     }
     
-    func getAll(completion:(result: Array<Court>, error: NSError?)->Void) -> Void {
+    func getAll(completion:(result: Array<Schedule>, error: NSError?)->Void) -> Void {
         let headers = [
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
-        Alamofire.request(.GET, URLRequest.URLCourtsEnterprise, headers: headers)
+        Alamofire.request(.GET, URLRequest.URLSchedulesEnterprise, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseArray { (response: Response<[Court], NSError>) in
+            .responseArray { (response: Response<[Schedule], NSError>) in
                 
                 if response.result.isSuccess {
-                    let courtArray = response.result.value
+                    let scheduleArray = response.result.value
                     
-                    if let courtWrapper = courtArray {
-                        completion(result: courtWrapper, error: response.result.error)
+                    if let scheduleWrapper = scheduleArray {
+                        completion(result: scheduleWrapper, error: response.result.error)
                     }
                 } else {
                     completion(result: [], error: response.result.error)
@@ -89,5 +95,4 @@ class CourtAPI {
                 
         }
     }
-    
 }

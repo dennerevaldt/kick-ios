@@ -17,9 +17,9 @@ target 'kickoff' do
   pod 'DatePickerDialog', '1.1.4'
   pod 'Locksmith', '2.0.8'
   pod 'IQKeyboardManagerSwift', '4.0.5'
-  pod 'FacebookCore', '4.15.1'
-  pod 'FacebookLogin', '4.15.1'
-  pod 'FacebookShare', '4.15.1'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
   pod 'GoogleMaps', '1.13.2'
 
   target 'kickoffTests' do

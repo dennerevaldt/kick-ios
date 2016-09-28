@@ -14,10 +14,11 @@ import Alamofire
 import AlamofireObjectMapper
 import PKHUD
 
-class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, ScheduleDestinationViewController {
     private var isLoading = Bool()
     private var schedulesList: Array<Schedule> = Array<Schedule>()
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
+    var scheduleSelected:Schedule?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,25 +29,35 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
         customizeDZNEmptyDataSet()
         isLoading = true
         self.loadList()
+        self.setBackItem()
+    }
+    
+    func setBackItem() {
+        var backBtn = UIImage(named: "ic_back")
+        backBtn = backBtn?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.navigationController!.navigationBar.backIndicatorImage = backBtn;
+        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = backBtn;
+        
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        navigationItem.backBarButtonItem = backBarButton
     }
     
     func loadList() {
-        let headers = [
-            "x-access-token": KeychainManager.getToken(),
-            "Accept": "application/json"
-        ]
-        Alamofire.request(.GET, URLRequest.URLSchedulesEnterprise, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseArray { (response: Response<[Schedule], NSError>) in
-                let scheduleArray = response.result.value
-                
-                if let scheduleArray = scheduleArray {
-                    self.schedulesList = scheduleArray
-                    
-                    self.isLoading = false
-                    self.tableView.reloadData()
-                    self.refreshControl!.endRefreshing()
-                }
+        let scheduleAPI = ScheduleAPI()
+        
+        scheduleAPI.getAll(){(result, error) -> Void in
+            self.isLoading = false
+            self.refreshControl!.endRefreshing()
+            
+            if error == nil {
+                self.schedulesList = result
+                self.tableView.reloadData()
+            } else {
+                self.schedulesList = []
+                self.tableView.reloadData()
+                MessageAlert.error("Não foi possível buscar os horários registrados, tente novamente.")
+            }
         }
     }
     
@@ -68,6 +79,11 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
         return schedulesList.count
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        scheduleSelected = schedulesList[indexPath.row]
+        self.performSegueWithIdentifier("segueEditSchedule", sender: self)
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath)
@@ -82,28 +98,30 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .Default, title: "Excluir")
+        { (action, indexPath) -> Void in
             HUD.show(.Progress)
-            let id = schedulesList[indexPath.row].idSchedule!
             
-            let headers = [
-                "x-access-token": KeychainManager.getToken(),
-                "Accept": "application/json"
-            ]
-            Alamofire.request(.DELETE, URLRequest.URLSchedulesEnterprise + "/\(id)", headers: headers)
-                .validate(statusCode: 200..<300)
-                .responseJSON { response in
-                    HUD.hide()
-                    switch response.result {
-                    case .Success:
-                        self.loadList()
-                    case .Failure(let error):
-                        print(error)
+            let id = self.schedulesList[indexPath.row].idSchedule!
+            
+            let scheduleAPI = ScheduleAPI()
+            scheduleAPI.delete(id) { (result) -> Void in
+                HUD.hide()
+                if result {
+                    self.schedulesList.removeAtIndex(indexPath.row)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    
+                    if self.schedulesList.count == 0 {
+                        tableView.reloadData()
                     }
+                } else {
+                    MessageAlert.error("Problemas ao deletar horário.")
+                }
             }
         }
+        return [delete]
     }
     
     // MARK: DZNEmptyDataSetSource Methods
@@ -170,4 +188,22 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
         return loading
     }
     
+    // MARK: navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueNewSchedule" {
+            let destination = segue.destinationViewController as! EnterpriseNewScheduleController
+            destination.delegate = self
+        }
+        
+        if segue.identifier == "segueEditSchedule" {
+            let destination = segue.destinationViewController as! EnterpriseNewScheduleController
+            destination.delegate = self
+            destination.schedule = scheduleSelected
+        }
+    }
+    
+    // MARK: protocol schedule
+    func setNewSchedule() {
+        self.loadList()
+    }
 }

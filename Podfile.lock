@@ -39,20 +39,20 @@ PODS:
   - SCLAlertView (0.6.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (= 3.5.0)
   - AlamofireObjectMapper
-  - DatePickerDialog
-  - DZNEmptyDataSet
+  - DatePickerDialog (= 1.1.4)
+  - DZNEmptyDataSet (= 1.8.1)
   - FacebookCore
   - FacebookLogin
   - FacebookShare
   - GoogleMaps (= 1.13.2)
   - IQKeyboardManagerSwift (= 4.0.5)
-  - Locksmith
+  - Locksmith (= 2.0.8)
   - NVActivityIndicatorView (from `https://github.com/ninjaprox/NVActivityIndicatorView.git`, branch `swift2.3`)
-  - ObjectMapper
+  - ObjectMapper (= 1.4.0)
   - PKHUD
-  - SCLAlertView
+  - SCLAlertView (= 0.6.0)
 
 EXTERNAL SOURCES:
   NVActivityIndicatorView:
@@ -84,6 +84,6 @@ SPEC CHECKSUMS:
   PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
   SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
 
-PODFILE CHECKSUM: 30dd12e0d66078fc4580461297ecbc17de5a68c6
+PODFILE CHECKSUM: 41caa7f0e0dcd21bad21158787fb41f2f3fff925
 
 COCOAPODS: 1.0.1

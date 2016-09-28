@@ -15,6 +15,13 @@ class Schedule: Mappable {
     var date: String?
     var court: Court?
     
+    init(idSchedule:Int, horary:String, date:String, court:Court) {
+        self.idSchedule = idSchedule
+        self.horary = horary
+        self.date = date
+        self.court = court
+    }
+    
     required init?(_ map: Map) {
         
     }

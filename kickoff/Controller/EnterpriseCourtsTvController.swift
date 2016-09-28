@@ -62,6 +62,8 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
                 self.courtsList = result
                 self.tableView.reloadData()
             } else {
+                self.courtsList = []
+                self.tableView.reloadData()
                 MessageAlert.error("Não foi possível buscar quadras registradas, tente novamente.")
             }
         }
