@@ -11,6 +11,7 @@
 		5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532552291D9B5FA100469B96 /* ScheduleAPI.swift */; };
 		5347FDAB1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */; };
 		5347FDBD1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */; };
+		534AAC0B1D9DECBD0064BFB1 /* CoreLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AAC0A1D9DECBD0064BFB1 /* CoreLocationHelper.swift */; };
 		536301171D7A499D00BD9B69 /* PlayerGamesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536301161D7A499D00BD9B69 /* PlayerGamesTvController.swift */; };
 		5363011B1D7A527B00BD9B69 /* PlayerGamesNearTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5363011A1D7A527B00BD9B69 /* PlayerGamesNearTvController.swift */; };
 		5363011D1D7A530200BD9B69 /* PlayerNotificationsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5363011C1D7A530200BD9B69 /* PlayerNotificationsTvController.swift */; };
@@ -212,6 +213,7 @@
 		532552291D9B5FA100469B96 /* ScheduleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseSchedulesTvController.swift; sourceTree = "<group>"; };
 		5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseNotificationsTvController.swift; sourceTree = "<group>"; };
+		534AAC0A1D9DECBD0064BFB1 /* CoreLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationHelper.swift; sourceTree = "<group>"; };
 		534C8435BED6842F4C549155 /* Pods-kickoffUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoffUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kickoffUITests/Pods-kickoffUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		536301161D7A499D00BD9B69 /* PlayerGamesTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerGamesTvController.swift; sourceTree = "<group>"; };
 		5363011A1D7A527B00BD9B69 /* PlayerGamesNearTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerGamesNearTvController.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		53BDDF3F1D6E405E00C26B31 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				534AAC0A1D9DECBD0064BFB1 /* CoreLocationHelper.swift */,
 				536301301D7DDDE400BD9B69 /* URL.swift */,
 				53D6E0E91D883B07001A8040 /* Util.swift */,
 				537C137D1D8B2EDE00C071E5 /* KeychainManager.swift */,
@@ -1066,6 +1069,7 @@
 				5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */,
 				53E07F451D67A15C00C55E31 /* ViewController.swift in Sources */,
 				53D6E0FD1D88422F001A8040 /* EnterpriseNewScheduleController.swift in Sources */,
+				534AAC0B1D9DECBD0064BFB1 /* CoreLocationHelper.swift in Sources */,
 				5363011B1D7A527B00BD9B69 /* PlayerGamesNearTvController.swift in Sources */,
 				536A0D5F1D95FDF900305623 /* Place.swift in Sources */,
 				536A0D2E1D95745E00305623 /* SearchCityTVController.swift in Sources */,

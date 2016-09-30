@@ -20,7 +20,6 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var textFieldHour: UITextField!
     @IBOutlet weak var uiPickerCourts: UIPickerView!
     
-    let datePickerDialog: DatePickerDialog = DatePickerDialog()
     var pickerCourtData: Array<Court> = []
     var delegate: ScheduleDestinationViewController! = nil
     var courtSelected: Court?
@@ -33,18 +32,14 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
         self.uiPickerCourts.delegate = self
         
         if let scheduleWrapper = schedule {
-            self.textFieldDate.text = scheduleWrapper.date!
+            self.textFieldDate.text = Util.convertDateFormater(scheduleWrapper.date!)
             self.textFieldHour.text = scheduleWrapper.horary!
-            self.title = "Editar quadra"
+            self.title = "Editar horário"
         } else {
-            self.title = "Nova quadra"
+            self.title = "Novo horário"
         }
         
         self.setEventsFields()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
         self.loadDataPicker()
     }
     
@@ -62,14 +57,22 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
             if error == nil {
                 self.pickerCourtData = result
                 self.uiPickerCourts.reloadAllComponents()
+                
+                if self.schedule != nil && self.pickerCourtData.count > 0 {
+                    for (index,_) in self.pickerCourtData.enumerate() {
+                        if self.pickerCourtData[index].idCourt == self.schedule?.court?.idCourt {
+                            self.uiPickerCourts.selectRow(index, inComponent: 0, animated: true)
+                        }
+                    }
+                }
             } else {
-                MessageAlert.error("Não foi posseivel carregar as quadras cadastradas, tente novamente.")
+                MessageAlert.error("Não foi possível carregar as quadras cadastradas, tente novamente.")
             }
         }
     }
     
     func dateTapped(textField: UITextField) {
-        datePickerDialog.show("Data do jogo", doneButtonTitle: "OK", cancelButtonTitle: "Cancelar", datePickerMode: .Date) {
+        DatePickerDialog().show("Data do jogo", doneButtonTitle: "OK", cancelButtonTitle: "Cancelar", datePickerMode: .Date) {
             (date) -> Void in
             if let dateWrapper = date {
                self.textFieldDate.text = Util.convertDateFormater(dateWrapper)
@@ -78,10 +81,13 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
     }
     
     func hourTapped(textField: UITextField) {
-        datePickerDialog.show("Horário do jogo", doneButtonTitle: "OK", cancelButtonTitle: "Cancelar", datePickerMode: .Time) {
+        DatePickerDialog().show("Horário do jogo", doneButtonTitle: "OK", cancelButtonTitle: "Cancelar", datePickerMode: .Time) {
             (time) -> Void in
             if let time = time {
-                self.textFieldHour.text = Util.convertHourFormater(time)
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "HH:mm"
+                
+                self.textFieldHour.text = "\(formatter.stringFromDate(time))"
             }
         }
     }
@@ -110,21 +116,41 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
     
     // MARK: schedule actions buttons
     @IBAction func btnSaveSchedule(sender: AnyObject) {
+        HUD.show(.Progress)
+        
         if let court = courtSelected {
             courtSelected = court
         } else {
-            courtSelected = pickerCourtData[0]
+            if pickerCourtData.count > 0 {
+                courtSelected = pickerCourtData[0]
+            }
         }
+        
         let dateFormat = Util.getDateFormatMysql(self.textFieldDate.text!)
         
-        let schedule = Schedule(idSchedule: 0, horary: self.textFieldHour.text!, date: dateFormat, court: courtSelected!)
-        let scheduleAPI = ScheduleAPI()
-        scheduleAPI.create(schedule){(result) -> Void in
-            if result {
-                self.delegate.setNewSchedule()
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                MessageAlert.error("Problema ao cadastrar nova quadra, tente novamente.")
+        if self.schedule == nil {
+            let schedule = Schedule(idSchedule: 0, horary: self.textFieldHour.text!, date: dateFormat, court: courtSelected!)
+            let scheduleAPI = ScheduleAPI()
+            scheduleAPI.create(schedule){(result) -> Void in
+                HUD.hide()
+                if result {
+                    self.delegate.setNewSchedule()
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    MessageAlert.error("Problema ao cadastrar nova quadra, tente novamente.")
+                }
+            }
+        } else {
+            let schedule = Schedule(idSchedule: self.schedule!.idSchedule!, horary: self.textFieldHour.text!, date: dateFormat, court: courtSelected!)
+            let scheduleAPI = ScheduleAPI()
+            scheduleAPI.edit(schedule){(result) -> Void in
+                HUD.hide()
+                if result {
+                    self.delegate.setNewSchedule()
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    MessageAlert.error("Problema ao editar quadra, tente novamente.")
+                }
             }
         }
     }

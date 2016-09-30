@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Kick Off</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -58,6 +58,10 @@
 	<string>545567282282477</string>
 	<key>FacebookDisplayName</key>
 	<string>Kick Off</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Precisamos da sua localização, aceite para continuarmos</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Precisamos da sua localização, aceite para continuarmos</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

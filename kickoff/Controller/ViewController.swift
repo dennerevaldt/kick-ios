@@ -32,6 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         textFieldUser.delegate = self
         textFieldPassword.delegate = self
+        
     }
     
     override func viewDidAppear(animated: Bool) {

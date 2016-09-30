@@ -42,10 +42,14 @@ class ScheduleAPI {
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
+        var idcourt = 0
+        if let court = schedule.court?.idCourt {
+            idcourt = court
+        }
         let parameters : [ String : String] = [
             "date": schedule.date!,
             "horary": schedule.horary!,
-            "court_id": "\(schedule.court?.idCourt!)"
+            "court_id": "\(idcourt)"
         ]
         Alamofire.request(.PUT, URLRequest.URLSchedulesEnterprise + "/\(schedule.idSchedule!)", headers: headers, parameters: parameters)
             .validate()

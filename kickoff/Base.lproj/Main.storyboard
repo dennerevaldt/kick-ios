@@ -22,9 +22,6 @@
                                 <rect key="frame" x="20" y="72" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dateTapped:" destination="TYk-7P-EAt" eventType="editingDidEnd" id="cBa-ys-a1f"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clique para escolher a hora" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BvM-oo-MjU">
                                 <rect key="frame" x="20" y="110" width="560" height="30"/>
@@ -1316,11 +1313,11 @@
         <image name="logo_100" width="100" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CCu-DG-9iP"/>
-        <segue reference="g0h-Vx-GBn"/>
         <segue reference="2CE-iw-wOe"/>
+        <segue reference="g0h-Vx-GBn"/>
+        <segue reference="CCu-DG-9iP"/>
         <segue reference="WD1-40-foE"/>
-        <segue reference="MeH-kk-g0l"/>
         <segue reference="aeD-mj-Vud"/>
+        <segue reference="GuD-Pu-ugf"/>
     </inferredMetricsTieBreakers>
 </document>
