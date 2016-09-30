@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		52711624521EB950B63448B7 /* Pods_kickoffUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079FCD499B0A2544AFF0434A /* Pods_kickoffUITests.framework */; };
+		531745B01D9EA49D00CB07C7 /* GameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745AF1D9EA49D00CB07C7 /* GameAPI.swift */; };
+		531745C61D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745C51D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift */; };
+		531745C81D9ECEEF00CB07C7 /* EnterpriseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745C71D9ECEEF00CB07C7 /* EnterpriseAPI.swift */; };
 		5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532552291D9B5FA100469B96 /* ScheduleAPI.swift */; };
 		5347FDAB1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */; };
 		5347FDBD1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */; };
@@ -210,6 +213,9 @@
 		079FCD499B0A2544AFF0434A /* Pods_kickoffUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kickoffUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D463984A8125D15F2AE9BF /* Pods-kickoff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kickoff/Pods-kickoff.debug.xcconfig"; sourceTree = "<group>"; };
 		4593FC1A89CCD018A5340173 /* Pods-kickoffUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kickoffUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-kickoffUITests/Pods-kickoffUITests.release.xcconfig"; sourceTree = "<group>"; };
+		531745AF1D9EA49D00CB07C7 /* GameAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAPI.swift; sourceTree = "<group>"; };
+		531745C51D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEnterpriseCourtsTvController.swift; sourceTree = "<group>"; };
+		531745C71D9ECEEF00CB07C7 /* EnterpriseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseAPI.swift; sourceTree = "<group>"; };
 		532552291D9B5FA100469B96 /* ScheduleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseSchedulesTvController.swift; sourceTree = "<group>"; };
 		5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseNotificationsTvController.swift; sourceTree = "<group>"; };
@@ -398,6 +404,8 @@
 			children = (
 				5377C0301D994DEC006F9222 /* CourtAPI.swift */,
 				532552291D9B5FA100469B96 /* ScheduleAPI.swift */,
+				531745AF1D9EA49D00CB07C7 /* GameAPI.swift */,
+				531745C71D9ECEEF00CB07C7 /* EnterpriseAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 				537C13661D8AE38C00C071E5 /* ProfileTableViewController.swift */,
 				536A0CF01D94101F00305623 /* ConfirmAccountViewController.swift */,
 				536A0D2D1D95745E00305623 /* SearchCityTVController.swift */,
+				531745C51D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1052,7 +1061,9 @@
 				5363011D1D7A530200BD9B69 /* PlayerNotificationsTvController.swift in Sources */,
 				5347FDBD1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift in Sources */,
 				53D6E0EA1D883B07001A8040 /* Util.swift in Sources */,
+				531745B01D9EA49D00CB07C7 /* GameAPI.swift in Sources */,
 				536A0D491D95F41C00305623 /* PlacesApi.swift in Sources */,
+				531745C61D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift in Sources */,
 				5388CFD81D8886240037A94B /* ErrorApi.swift in Sources */,
 				53D6E0FF1D884285001A8040 /* EnterpriseNewCourtController.swift in Sources */,
 				53D6E0FB1D88410E001A8040 /* PlayerNewGameController.swift in Sources */,
@@ -1066,6 +1077,7 @@
 				5377C0311D994DEC006F9222 /* CourtAPI.swift in Sources */,
 				53C7A05B1D99931A00B1FE70 /* MessageAlert.swift in Sources */,
 				537C137E1D8B2EDE00C071E5 /* KeychainManager.swift in Sources */,
+				531745C81D9ECEEF00CB07C7 /* EnterpriseAPI.swift in Sources */,
 				5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */,
 				53E07F451D67A15C00C55E31 /* ViewController.swift in Sources */,
 				53D6E0FD1D88422F001A8040 /* EnterpriseNewScheduleController.swift in Sources */,

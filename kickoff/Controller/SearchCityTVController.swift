@@ -47,6 +47,7 @@ class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmp
     
     // MARK: DZ empty data set
     func customizeDZNEmptyDataSet() {
+        tableView.tableFooterView = UIView()
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
     }

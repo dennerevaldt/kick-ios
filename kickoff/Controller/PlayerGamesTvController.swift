@@ -14,10 +14,11 @@ import Alamofire
 import AlamofireObjectMapper
 import PKHUD
 
-class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, GameDestinationViewController {
     private var isLoading = Bool()
     private var gamesList: Array<Game> = Array<Game>()
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0, 0, 44, 44), type: .LineScale)
+    var gameSelected:Game?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,26 +32,35 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
         customizeDZNEmptyDataSet()
         isLoading = true
         self.loadList()
+        self.setBackItem()
     }
-
+    
+    func setBackItem() {
+        var backBtn = UIImage(named: "ic_back")
+        backBtn = backBtn?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.navigationController!.navigationBar.backIndicatorImage = backBtn;
+        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = backBtn;
+        
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        navigationItem.backBarButtonItem = backBarButton
+    }
     
     func loadList() {
-        let headers = [
-            "x-access-token": KeychainManager.getToken(),
-            "Accept": "application/json"
-        ]
-        Alamofire.request(.GET, URLRequest.URLGamesPlayer, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseArray { (response: Response<[Game], NSError>) in
-                let gameArray = response.result.value
-                
-                if let gameArray = gameArray {
-                    self.gamesList = gameArray
-                    
-                    self.isLoading = false
-                    self.tableView.reloadData()
-                    self.refreshControl!.endRefreshing()
-                }
+        let gameAPI = GameAPI()
+        
+        gameAPI.getAll(){(result, error) -> Void in
+            self.isLoading = false
+            self.refreshControl!.endRefreshing()
+            
+            if error == nil {
+                self.gamesList = result
+                self.tableView.reloadData()
+            } else {
+                self.gamesList = []
+                self.tableView.reloadData()
+                MessageAlert.error("Não foi possível buscar os jogos registrados, tente novamente.")
+            }
         }
     }
     
@@ -85,30 +95,37 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .Default, title: "Excluir")
+        { (action, indexPath) -> Void in
             HUD.show(.Progress)
-            let id = gamesList[indexPath.row].idGame!
             
-            let headers = [
-                "x-access-token": KeychainManager.getToken(),
-                "Accept": "application/json"
-            ]
-            Alamofire.request(.DELETE, URLRequest.URLGamesPlayer + "/\(id)", headers: headers)
-                .validate(statusCode: 200..<300)
-                .responseJSON { response in
-                    HUD.hide()
-                    switch response.result {
-                    case .Success:
-                        self.loadList()
-                    case .Failure(let error):
-                        print(error)
+            let id = self.gamesList[indexPath.row].idGame!
+            
+            let gameAPI = GameAPI()
+            gameAPI.delete(id) { (result) -> Void in
+                HUD.hide()
+                if result {
+                    self.gamesList.removeAtIndex(indexPath.row)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    
+                    if self.gamesList.count == 0 {
+                        tableView.reloadData()
                     }
+                } else {
+                    MessageAlert.error("Problemas ao deletar jogo.")
+                }
             }
         }
+        return [delete]
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        gameSelected = gamesList[indexPath.row]
+        self.performSegueWithIdentifier("segueEditGame", sender: self)
+    }
+        
     // MARK: DZNEmptyDataSetSource Methods
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         if isLoading {
@@ -171,5 +188,23 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
         loading.startAnimating()
         
         return loading
+    }
+    
+    // MARK: navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueNewGame" {
+            let destination = segue.destinationViewController as! PlayerNewGameController
+            destination.delegate = self
+        }
+        
+        if segue.identifier == "segueEditGame" {
+            let destination = segue.destinationViewController as! PlayerNewGameController
+            destination.delegate = self
+            destination.game = gameSelected
+        }
+    }
+    
+    func setNewGame() {
+        self.loadList()
     }
 }

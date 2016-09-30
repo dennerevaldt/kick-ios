@@ -278,11 +278,11 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
                 if response.result.isSuccess {
                     if let data = response.result.value {
                         HUD.hide()
+                        self.navigationController?.navigationBarHidden = true
                         if (data.objectForKey("Person")?.objectForKey("typeperson"))! as! String == "P" {
                             let User = Mapper<Player>().map(data)
                             self.setCredentials((User?.fullName!)!, token: token, email: (User?.eMail!)!, typeUser: "P")
                             self.performSegueWithIdentifier("seguePlayer", sender: self)
-                            
                         } else {
                             let User = Mapper<Enterprise>().map(data)
                             self.setCredentials((User?.fullName!)!, token: token, email: (User?.eMail!)!, typeUser: "E")

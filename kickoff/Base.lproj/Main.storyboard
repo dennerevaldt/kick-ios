@@ -878,13 +878,16 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_add_white" id="AQ9-Xz-GQN">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="23N-ko-bCY" kind="show" id="2Fc-NQ-OXL"/>
+                                <segue destination="IsU-MU-kfF" kind="show" identifier="segueNewGame" id="YHb-G7-49O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="B7O-bx-PHP">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <segue destination="IsU-MU-kfF" kind="show" identifier="segueEditGame" id="G37-ab-pwN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAJ-Uk-k6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -971,7 +974,7 @@
         <!--Novo jogo-->
         <scene sceneID="qwA-WP-7eP">
             <objects>
-                <viewController id="IsU-MU-kfF" customClass="PlayerNewGameController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="IsU-MU-kfF" customClass="PlayerNewGameController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8zi-jk-D5v"/>
                         <viewControllerLayoutGuide type="bottom" id="1Zp-4b-s21"/>
@@ -991,43 +994,87 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XER-oV-XwA">
-                                <rect key="frame" x="0.0" y="148" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="148" width="600" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="mzO-mI-iv4"/>
+                                </constraints>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQk-5h-cpC">
-                                <rect key="frame" x="279" y="372" width="43" height="30"/>
-                                <state key="normal" title="Salvar">
-                                    <color key="titleColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XER-oV-XwA" firstAttribute="leading" secondItem="mEY-Sh-Ja0" secondAttribute="leadingMargin" constant="-20" id="4j9-Wk-zZA"/>
                             <constraint firstAttribute="leadingMargin" secondItem="oNf-Sm-sgz" secondAttribute="leading" id="8SY-hp-9wb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XER-oV-XwA" secondAttribute="trailing" constant="-20" id="G6d-9x-mMX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oNf-Sm-sgz" secondAttribute="trailing" id="Juq-AK-cXo"/>
                             <constraint firstItem="oNf-Sm-sgz" firstAttribute="top" secondItem="8zi-jk-D5v" secondAttribute="bottom" constant="8" id="NqR-dY-TKB"/>
                             <constraint firstItem="WbB-yX-P35" firstAttribute="top" secondItem="oNf-Sm-sgz" secondAttribute="bottom" constant="8" id="PpO-OM-up3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WbB-yX-P35" secondAttribute="trailing" id="Von-Go-Oli"/>
-                            <constraint firstItem="zQk-5h-cpC" firstAttribute="top" secondItem="XER-oV-XwA" secondAttribute="bottom" constant="8" id="b57-cP-JLc"/>
-                            <constraint firstItem="XER-oV-XwA" firstAttribute="top" secondItem="WbB-yX-P35" secondAttribute="bottom" constant="8" id="cIf-b1-Tcl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zQk-5h-cpC" secondAttribute="trailing" constant="258" id="eki-58-w5D"/>
+                            <constraint firstItem="XER-oV-XwA" firstAttribute="top" secondItem="WbB-yX-P35" secondAttribute="bottom" constant="8" symbolic="YES" id="ZgG-Sw-FhQ"/>
+                            <constraint firstItem="XER-oV-XwA" firstAttribute="centerX" secondItem="WbB-yX-P35" secondAttribute="centerX" id="cYy-ht-RN1"/>
+                            <constraint firstItem="XER-oV-XwA" firstAttribute="leading" secondItem="mEY-Sh-Ja0" secondAttribute="leading" id="fLu-gQ-iys"/>
                             <constraint firstAttribute="leadingMargin" secondItem="WbB-yX-P35" secondAttribute="leading" id="hu6-Gj-UQx"/>
-                            <constraint firstItem="zQk-5h-cpC" firstAttribute="leading" secondItem="mEY-Sh-Ja0" secondAttribute="leadingMargin" constant="259" id="kxG-b9-cPc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Novo jogo" id="d7c-q9-qxR">
-                        <barButtonItem key="leftBarButtonItem" image="ic_close_white" id="rLK-1Z-1TJ">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="ic_done_white" id="DhG-Xh-K2O">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="btnClose:" destination="IsU-MU-kfF" id="kjg-GP-Ekp"/>
+                                <action selector="btnSaveGame:" destination="IsU-MU-kfF" id="s7f-BG-Ogd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pickerViewSchedules" destination="XER-oV-XwA" id="L1F-FE-3pd"/>
+                        <outlet property="textFieldEntepriseCourt" destination="WbB-yX-P35" id="7HP-Aa-scF"/>
+                        <outlet property="textFieldNameGame" destination="oNf-Sm-sgz" id="iOV-fh-lhD"/>
+                        <segue destination="p3V-bI-8ba" kind="show" identifier="segueSetEnteprise" id="OKI-oo-Y3b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hG-45-iYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5123" y="1158"/>
+            <point key="canvasLocation" x="4341" y="1158"/>
+        </scene>
+        <!--Search Enterprise Courts Tv Controller-->
+        <scene sceneID="zRV-QJ-Jy6">
+            <objects>
+                <tableViewController id="p3V-bI-8ba" customClass="SearchEnterpriseCourtsTvController" customModule="kickoff" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="57t-oo-OAb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellEnteprise" textLabel="hwQ-Nt-RG9" detailTextLabel="bpr-40-v3o" style="IBUITableViewCellStyleSubtitle" id="2M6-Lj-TGe">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2M6-Lj-TGe" id="y5V-YF-UTC">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hwQ-Nt-RG9">
+                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bpr-40-v3o">
+                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p3V-bI-8ba" id="7X1-Si-Kva"/>
+                            <outlet property="delegate" destination="p3V-bI-8ba" id="Wy3-RU-S9K"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ayO-e4-JaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5095" y="1158"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ItI-gh-GO6">
@@ -1231,28 +1278,6 @@
             </objects>
             <point key="canvasLocation" x="3477" y="-1166"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="bEK-j0-Ube">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="23N-ko-bCY" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tgd-lq-61A">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IsU-MU-kfF" kind="relationship" relationship="rootViewController" id="GGy-TX-Sws"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yfT-k0-6gp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4311" y="1158"/>
-        </scene>
         <!--Perfil-->
         <scene sceneID="gdM-xb-qkB">
             <objects>
@@ -1313,11 +1338,12 @@
         <image name="logo_100" width="100" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2CE-iw-wOe"/>
-        <segue reference="g0h-Vx-GBn"/>
-        <segue reference="CCu-DG-9iP"/>
-        <segue reference="WD1-40-foE"/>
         <segue reference="aeD-mj-Vud"/>
+        <segue reference="2CE-iw-wOe"/>
+        <segue reference="M3s-UU-ofB"/>
+        <segue reference="CCu-DG-9iP"/>
+        <segue reference="G37-ab-pwN"/>
+        <segue reference="WD1-40-foE"/>
         <segue reference="GuD-Pu-ugf"/>
     </inferredMetricsTieBreakers>
 </document>

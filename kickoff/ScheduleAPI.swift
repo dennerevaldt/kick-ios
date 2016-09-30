@@ -17,14 +17,10 @@ class ScheduleAPI {
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
-        var idcourt = 0
-        if let court = schedule.court?.idCourt {
-            idcourt = court
-        }
         let parameters : [ String : String] = [
             "date": schedule.date!,
             "horary": schedule.horary!,
-            "court_id": "\(idcourt)"
+            "court_id": "\(schedule.court!.idCourt!)"
         ]
         Alamofire.request(.POST, URLRequest.URLSchedulesEnterprise, headers: headers, parameters: parameters)
             .validate()
@@ -42,14 +38,10 @@ class ScheduleAPI {
             "x-access-token": KeychainManager.getToken(),
             "Accept": "application/json"
         ]
-        var idcourt = 0
-        if let court = schedule.court?.idCourt {
-            idcourt = court
-        }
         let parameters : [ String : String] = [
             "date": schedule.date!,
             "horary": schedule.horary!,
-            "court_id": "\(idcourt)"
+            "court_id": "\(schedule.court!.idCourt!)"
         ]
         Alamofire.request(.PUT, URLRequest.URLSchedulesEnterprise + "/\(schedule.idSchedule!)", headers: headers, parameters: parameters)
             .validate()
@@ -84,6 +76,28 @@ class ScheduleAPI {
             "Accept": "application/json"
         ]
         Alamofire.request(.GET, URLRequest.URLSchedulesEnterprise, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseArray { (response: Response<[Schedule], NSError>) in
+                
+                if response.result.isSuccess {
+                    let scheduleArray = response.result.value
+                    
+                    if let scheduleWrapper = scheduleArray {
+                        completion(result: scheduleWrapper, error: response.result.error)
+                    }
+                } else {
+                    completion(result: [], error: response.result.error)
+                }
+                
+        }
+    }
+    
+    func getAllSchedulesByIdEnteprise(idEnterprise:Int, completion:(result: Array<Schedule>, error: NSError?)->Void) -> Void {
+        let headers = [
+            "x-access-token": KeychainManager.getToken(),
+            "Accept": "application/json"
+        ]
+        Alamofire.request(.GET, URLRequest.URLSchedulesEnterprise + "/enterprise/\(idEnterprise)", headers: headers)
             .validate(statusCode: 200..<300)
             .responseArray { (response: Response<[Schedule], NSError>) in
                 

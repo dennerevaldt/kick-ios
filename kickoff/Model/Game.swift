@@ -17,6 +17,15 @@ class Game: Mappable {
     var playerList: Array<Player>?
     var court: Court?
     
+    init(idGame: Int, name: String, creator_id: String, schedule: Schedule, playerList: Array<Player>, court: Court) {
+        self.idGame = idGame
+        self.name = name
+        self.creator_id = creator_id
+        self.schedule = schedule
+        self.playerList = playerList
+        self.court = court
+    }
+    
     required init?(_ map: Map) {
         
     }
