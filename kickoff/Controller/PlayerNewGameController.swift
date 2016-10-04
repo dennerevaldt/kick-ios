@@ -19,7 +19,6 @@ class PlayerNewGameController: UIViewController , UITextFieldDelegate, UIPickerV
     @IBOutlet weak var textFieldEntepriseCourt: UITextField!
     @IBOutlet weak var pickerViewSchedules: UIPickerView!
     
-    var game: Game?
     var entepriseSelected: Enterprise?
     var scheduleSelected: Schedule?
     var pickerData: [Schedule] = []
@@ -33,14 +32,6 @@ class PlayerNewGameController: UIViewController , UITextFieldDelegate, UIPickerV
         pickerViewSchedules.delegate = self
         pickerViewSchedules.dataSource = self
         self.pickerViewSchedules.hidden = true
-        
-        if let gameWrapper = game {
-            title = "Editar jogo"
-            textFieldNameGame.text = gameWrapper.name!
-            //textFieldEntepriseCourt.text =
-        } else {
-            title = "Novo jogo"
-        }
         
         self.setBackItem()
     }

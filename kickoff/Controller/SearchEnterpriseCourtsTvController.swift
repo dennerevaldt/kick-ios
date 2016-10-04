@@ -10,38 +10,49 @@ import UIKit
 import DZNEmptyDataSet
 import NVActivityIndicatorView
 import PKHUD
+import CoreLocation
 
 protocol DestSetEnterpriseViewController {
     func setCordinates(enterprise: Enterprise)
 }
 
-class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, CLLocationManagerDelegate {
     
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     private var isLoading = Bool()
     var listEnterprises: Array<Enterprise> = []
     var entepriseSelected: Enterprise?
     var delegate: DestSetEnterpriseViewController! = nil
-
+    
+    var locationManager : CLLocationManager = CLLocationManager()
+    var startLocation : CLLocation!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        HUD.show(.Progress)
         self.title = "Escolha a empresa"
         self.customizeDZNEmptyDataSet()
-        self.loadList()
+        self.startLocManager()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func startLocManager() -> Void {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        startLocation = nil
+    }
+    
     // MARK: - Load data enteprises
     
-    func loadList() -> Void {
-        HUD.show(.Progress)
+    func loadList(lat:String, lng:String) -> Void {
         let entepriseAPI = EnterpriseAPI()
         
-        entepriseAPI.getAllProximity("-29.4529001", lng: "-49.9387414"){ (result, error) -> Void in
+        entepriseAPI.getAllProximity(lat, lng: lng){ (result, error) -> Void in
             HUD.hide()
             if error == nil {
                 self.listEnterprises = result
@@ -147,6 +158,41 @@ class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSet
         loading.startAnimating()
         
         return loading
+    }
+    
+    // MARK: Location
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let lastLocation = locations[locations.count - 1]
+        
+        if startLocation == nil{
+            locationManager.stopUpdatingHeading()
+            startLocation = lastLocation
+            let lat = "\(lastLocation.coordinate.latitude)"
+            let lng = "\(lastLocation.coordinate.longitude)"
+            self.loadList(lat, lng: lng)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error.localizedDescription)
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        switch status {
+        case .Restricted:
+            // If restricted by e.g. parental controls. User can't enable Location Services
+            HUD.hide()
+            MessageAlert.warning("Não temos acesso a sua localização, permita nas suas configurações e tente novamente")
+            break
+        case .Denied:
+            // If user denied your app access to Location Services, but can grant access from Settings.app
+            HUD.hide()
+            MessageAlert.warning("Não temos acesso a sua localização, permita nas suas configurações e tente novamente")
+            break
+        default:
+            break
+        }
     }
 
 }

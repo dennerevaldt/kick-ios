@@ -23,6 +23,8 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.rowHeight = 65.0
+        
         self.refreshControl?.addTarget(self, action: #selector(EnterpriseCourtsTvController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         
         // Cor tabs
@@ -93,6 +95,14 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         
         cell.textLabel?.text = courtsList[indexPath.row].name
         cell.detailTextLabel?.text = courtsList[indexPath.row].category
+        
+        if courtsList[indexPath.row].category == "Futebol society (7)" {
+            let img = Util.imageWithImage(UIImage(named: "icon_society")!, scaledToSize: CGSize(width: 45, height: 45))
+            cell.imageView?.image = img
+        } else {
+            let img = Util.imageWithImage(UIImage(named: "icon_futsal")!, scaledToSize: CGSize(width: 45, height: 45))
+            cell.imageView?.image = img
+        }
         
         return cell
     }

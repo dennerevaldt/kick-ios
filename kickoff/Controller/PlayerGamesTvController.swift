@@ -19,6 +19,7 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
     private var gamesList: Array<Game> = Array<Game>()
     let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0, 0, 44, 44), type: .LineScale)
     var gameSelected:Game?
+    let loc = CoreLocationHelper()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
         self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat(76.0/255.0), green: CGFloat(175.0/255.0), blue: CGFloat(80.0/255.0), alpha: CGFloat(1.0))
         
         tableView.tableFooterView = UIView()
+        self.tableView.rowHeight = 64.0
+        
         customizeDZNEmptyDataSet()
         isLoading = true
         self.loadList()
@@ -83,10 +86,17 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameCell
         
-        cell.textLabel?.text = gamesList[indexPath.row].name
-        cell.detailTextLabel?.text = gamesList[indexPath.row].schedule?.horary
+        cell.nameGame.text = gamesList[indexPath.row].name
+        cell.dateGame.text = Util.convertDateFormater(gamesList[indexPath.row].schedule!.date!)
+        cell.hourGame.text = gamesList[indexPath.row].schedule!.horary
+        
+        if gamesList[indexPath.row].court?.category == "Futebol society (7)" {
+            cell.imageGame.image = UIImage(named: "icon_society")
+        } else {
+            cell.imageGame.image = UIImage(named: "icon_futsal")
+        }
         
         return cell
     }
@@ -123,7 +133,6 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         gameSelected = gamesList[indexPath.row]
-        self.performSegueWithIdentifier("segueEditGame", sender: self)
     }
         
     // MARK: DZNEmptyDataSetSource Methods
@@ -195,12 +204,6 @@ class PlayerGamesTvController: UITableViewController, DZNEmptyDataSetSource, DZN
         if segue.identifier == "segueNewGame" {
             let destination = segue.destinationViewController as! PlayerNewGameController
             destination.delegate = self
-        }
-        
-        if segue.identifier == "segueEditGame" {
-            let destination = segue.destinationViewController as! PlayerNewGameController
-            destination.delegate = self
-            destination.game = gameSelected
         }
     }
     

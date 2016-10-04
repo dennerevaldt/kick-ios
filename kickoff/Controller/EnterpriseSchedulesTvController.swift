@@ -86,10 +86,21 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath)
+//        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath)
+//        
+//        cell.textLabel?.text = Util.convertDateFormater(schedulesList[indexPath.row].date!)
+//        cell.detailTextLabel?.text = schedulesList[indexPath.row].horary
+        let cell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath) as! ScheduleCell
         
-        cell.textLabel?.text = Util.convertDateFormater(schedulesList[indexPath.row].date!)
-        cell.detailTextLabel?.text = schedulesList[indexPath.row].horary
+        cell.dateSchedule.text = Util.convertDateFormater(schedulesList[indexPath.row].date!)
+        cell.horarySchedule.text = schedulesList[indexPath.row].horary
+        cell.nameCourtSchedule.text = schedulesList[indexPath.row].court!.name
+        
+        if schedulesList[indexPath.row].court?.category == "Futebol society (7)" {
+            cell.imageSchedule.image = UIImage(named: "icon_society")
+        } else {
+            cell.imageSchedule.image = UIImage(named: "icon_futsal")
+        }
         
         return cell
     }

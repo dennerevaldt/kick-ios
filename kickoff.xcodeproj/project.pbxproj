@@ -11,6 +11,8 @@
 		531745B01D9EA49D00CB07C7 /* GameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745AF1D9EA49D00CB07C7 /* GameAPI.swift */; };
 		531745C61D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745C51D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift */; };
 		531745C81D9ECEEF00CB07C7 /* EnterpriseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745C71D9ECEEF00CB07C7 /* EnterpriseAPI.swift */; };
+		531745CB1D9F3B7D00CB07C7 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745CA1D9F3B7D00CB07C7 /* GameCell.swift */; };
+		531745CD1D9F4BBA00CB07C7 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531745CC1D9F4BBA00CB07C7 /* ScheduleCell.swift */; };
 		5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532552291D9B5FA100469B96 /* ScheduleAPI.swift */; };
 		5347FDAB1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */; };
 		5347FDBD1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */; };
@@ -216,6 +218,8 @@
 		531745AF1D9EA49D00CB07C7 /* GameAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAPI.swift; sourceTree = "<group>"; };
 		531745C51D9EB2E900CB07C7 /* SearchEnterpriseCourtsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEnterpriseCourtsTvController.swift; sourceTree = "<group>"; };
 		531745C71D9ECEEF00CB07C7 /* EnterpriseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseAPI.swift; sourceTree = "<group>"; };
+		531745CA1D9F3B7D00CB07C7 /* GameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		531745CC1D9F4BBA00CB07C7 /* ScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		532552291D9B5FA100469B96 /* ScheduleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		5347FDAA1D7E61C9008683B1 /* EnterpriseSchedulesTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseSchedulesTvController.swift; sourceTree = "<group>"; };
 		5347FDBC1D7E6281008683B1 /* EnterpriseNotificationsTvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseNotificationsTvController.swift; sourceTree = "<group>"; };
@@ -342,6 +346,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		531745C91D9F3B4C00CB07C7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				531745CA1D9F3B7D00CB07C7 /* GameCell.swift */,
+				531745CC1D9F4BBA00CB07C7 /* ScheduleCell.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		537392541D673998007EE58C = {
 			isa = PBXGroup;
 			children = (
@@ -367,11 +380,11 @@
 		5373925F1D673998007EE58C /* kickoff */ = {
 			isa = PBXGroup;
 			children = (
+				531745C91D9F3B4C00CB07C7 /* UI */,
 				5377C01B1D994DC7006F9222 /* API */,
 				53BDDF3F1D6E405E00C26B31 /* Helpers */,
 				53E07F3D1D67A12C00C55E31 /* Controller */,
 				53E07F3E1D67A12C00C55E31 /* Model */,
-				53E07F3F1D67A12C00C55E31 /* View */,
 				537392601D673998007EE58C /* AppDelegate.swift */,
 				537392671D673999007EE58C /* Assets.xcassets */,
 				536A0D151D94774D00305623 /* Main.storyboard */,
@@ -459,13 +472,6 @@
 				536A0D5E1D95FDF900305623 /* Place.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		53E07F3F1D67A12C00C55E31 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		53E07F481D6B780D00C55E31 /* Pods */ = {
@@ -1068,6 +1074,7 @@
 				53D6E0FF1D884285001A8040 /* EnterpriseNewCourtController.swift in Sources */,
 				53D6E0FB1D88410E001A8040 /* PlayerNewGameController.swift in Sources */,
 				53E07F431D67A15C00C55E31 /* TabEnterpriseController.swift in Sources */,
+				531745CB1D9F3B7D00CB07C7 /* GameCell.swift in Sources */,
 				537C13671D8AE38C00C071E5 /* ProfileTableViewController.swift in Sources */,
 				53D6E0D21D8791D0001A8040 /* Court.swift in Sources */,
 				536301231D7CF1EA00BD9B69 /* EnterpriseCourtsTvController.swift in Sources */,
@@ -1079,6 +1086,7 @@
 				537C137E1D8B2EDE00C071E5 /* KeychainManager.swift in Sources */,
 				531745C81D9ECEEF00CB07C7 /* EnterpriseAPI.swift in Sources */,
 				5325522A1D9B5FA100469B96 /* ScheduleAPI.swift in Sources */,
+				531745CD1D9F4BBA00CB07C7 /* ScheduleCell.swift in Sources */,
 				53E07F451D67A15C00C55E31 /* ViewController.swift in Sources */,
 				53D6E0FD1D88422F001A8040 /* EnterpriseNewScheduleController.swift in Sources */,
 				534AAC0B1D9DECBD0064BFB1 /* CoreLocationHelper.swift in Sources */,

@@ -60,4 +60,13 @@ class Util {
         
         return timeStamp
     }
+    
+    static func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(newSize)
+        image.drawInRect(CGRect(x: 0,y: 0,width: newSize.width,height: newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        newImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        return newImage
+    }
 }

@@ -35,23 +35,6 @@ class CoreLocationHelper: NSObject, CLLocationManagerDelegate {
         print(error.localizedDescription)
     }
     
-    func calculateLocation(latitude : Double, longitude : Double) -> Double?{
-        
-        if startLocation != nil{
-            let newCoordinate = CLLocation(latitude: latitude, longitude: longitude)
-            let coordinate : CLLocationDistance = startLocation.distanceFromLocation(newCoordinate)
-            
-            let metrics = coordinate.description
-            
-            let separated = metrics.componentsSeparatedByString(".")
-            
-            return Double(separated[0])
-        }
-        return nil
-    }
-    
-    
-    
 }
 
 

@@ -55,6 +55,11 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
         courtAPI.getAll(){(result, error) -> Void in
             HUD.hide()
             if error == nil {
+                if result.count == 0 {
+                    MessageAlert.warning("Você ainda não possui quadras cadastradas, insira ao menos uma e tente novamente.")
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+                
                 self.pickerCourtData = result
                 self.uiPickerCourts.reloadAllComponents()
                 
