@@ -127,10 +127,18 @@ class PlayerNewGameController: UIViewController , UITextFieldDelegate, UIPickerV
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
+    // Style row pickerView
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let label = UILabel(frame: CGRectMake(0, 0, 400, 45))
+        label.lineBreakMode = .ByWordWrapping
+        label.numberOfLines = 4
+        label.text = pickerData[row].horary!+"\n"+Util.convertDateFormater(pickerData[row].date!)+"\n"+pickerData[row].court!.name!+"\n"+pickerData[row].court!.category!
+        label.sizeToFit()
+        return label
+    }
     
-    // The data to return for the row and component (column) that's being passed in
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row].horary
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 85.0
     }
     
     // Catpure the picker view selection

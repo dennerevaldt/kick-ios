@@ -109,9 +109,18 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
         return pickerCourtData.count
     }
     
-    // The data to return for the row and component (column) that's being passed in
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerCourtData[row].name
+    // Style row pickerView
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let label = UILabel(frame: CGRectMake(0, 0, 400, 45))
+        label.lineBreakMode = .ByWordWrapping
+        label.numberOfLines = 2
+        label.text = pickerCourtData[row].name!+"\n"+pickerCourtData[row].category!
+        label.sizeToFit()
+        return label
+    }
+    
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 45.0
     }
     
     // Catpure the picker view selection

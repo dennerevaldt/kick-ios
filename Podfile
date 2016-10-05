@@ -21,6 +21,7 @@ target 'kickoff' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'GoogleMaps', '1.13.2'
+  pod 'AKMaskField', '1.0'
 
   target 'kickoffTests' do
     inherit! :search_paths

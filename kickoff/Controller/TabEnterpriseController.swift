@@ -13,6 +13,7 @@ import AlamofireObjectMapper
 import PKHUD
 import SCLAlertView
 import GoogleMaps
+import AKMaskField
 
 class TabEnterpriseController: UIViewController, UITextFieldDelegate, DestinationViewController {
 
@@ -20,9 +21,9 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate, Destinatio
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var user: UITextField!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var telephone: UITextField!
     @IBOutlet weak var cityState: UITextField!
     @IBOutlet weak var scrollViewForm: UIScrollView!
+    @IBOutlet weak var telephone: AKMaskField!
     
     var placeItemSelected: GMSPlace?
     
@@ -33,7 +34,7 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate, Destinatio
         email.delegate = self
         user.delegate = self
         password.delegate = self
-        telephone.delegate = self
+        //telephone.delegate = self
         cityState.delegate = self
         
         setBackItem()
@@ -119,6 +120,10 @@ class TabEnterpriseController: UIViewController, UITextFieldDelegate, Destinatio
     }
     
     func checkInputs() -> Bool {
+        if telephone.text!.rangeOfString("*") != nil {
+            return false
+        }
+        
         if user.text != "" && password.text != "" && nameFull.text != "" && telephone.text != "" && email.text != "" && cityState.text != "" && placeItemSelected != nil {
             return true
         }

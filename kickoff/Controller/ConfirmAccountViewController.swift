@@ -22,10 +22,10 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
     var typeUser: Int = 0
     
     @IBOutlet weak var textFieldUser: UITextField!
-    @IBOutlet weak var textFieldVariable: UITextField!
     @IBOutlet weak var textFieldCityState: UITextField!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var uiPickerView: UIPickerView!
+    @IBOutlet weak var textFieldVariable: UITextField!
     
     var pickerData: [String] = [String]()
     var placeItemSelected: GMSPlace?
@@ -53,6 +53,10 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
         
         // Init placeholder
         textFieldVariable.placeholder = "Telefone"
+        
+//        field = AKMaskField()
+//        field.mask = "({dd}) {dddd}-{dddd}"
+//        field.maskTemplate = "(__) ____-____"
         
         setBackItem()
     }
@@ -107,7 +111,7 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
         self.typeUser = row
         textFieldVariable.text = ""
         if row == 0 {
-           textFieldVariable.placeholder = "Telefone"
+            textFieldVariable.placeholder = "Telefone"
         } else if row == 1 {
            textFieldVariable.placeholder = "Posição de jogo"
         }

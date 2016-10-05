@@ -1,4 +1,5 @@
 PODS:
+  - AKMaskField (1.0.0)
   - Alamofire (3.5.0)
   - AlamofireObjectMapper (3.0.2):
     - Alamofire (~> 3.2)
@@ -39,6 +40,7 @@ PODS:
   - SCLAlertView (0.6.0)
 
 DEPENDENCIES:
+  - AKMaskField (= 1.0)
   - Alamofire (= 3.5.0)
   - AlamofireObjectMapper
   - DatePickerDialog (= 1.1.4)
@@ -65,6 +67,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ninjaprox/NVActivityIndicatorView.git
 
 SPEC CHECKSUMS:
+  AKMaskField: c312658717b204acbc762c3a9d05ffd248fc40a6
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   AlamofireObjectMapper: 70f97cbf45c01c48d26aa07a1a7059a60ed7411d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -84,6 +87,6 @@ SPEC CHECKSUMS:
   PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
   SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
 
-PODFILE CHECKSUM: 214395027a8a9a83744998e7462966ad9eccbb76
+PODFILE CHECKSUM: fef551636daf7d06ad293e48b8cdfabe8cb6f280
 
 COCOAPODS: 1.0.1

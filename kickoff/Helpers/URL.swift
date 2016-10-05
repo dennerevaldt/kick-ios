@@ -21,5 +21,5 @@ struct URLRequest {
     static let URLSchedulesEnterprise = "\(base_url)/schedule"
 }
 
-let base_url = "http://localhost:3000"
-//let base_url = "https://kickapi.herokuapp.com"
+//let base_url = "http://localhost:3000"
+let base_url = "https://kickapi.herokuapp.com"

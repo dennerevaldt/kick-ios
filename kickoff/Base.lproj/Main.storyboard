@@ -29,23 +29,23 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFq-wF-NO0">
-                                <rect key="frame" x="0.0" y="148" width="600" height="72"/>
+                                <rect key="frame" x="0.0" y="148" width="600" height="123"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="6hj-uc-lvd"/>
+                                    <constraint firstAttribute="height" constant="123" id="U5O-Rj-Tqt"/>
                                 </constraints>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="DNm-3L-YeD" secondAttribute="trailing" id="0Qr-wk-rYs"/>
-                            <constraint firstItem="mFq-wF-NO0" firstAttribute="leading" secondItem="jFb-c2-HLJ" secondAttribute="leading" id="4Kc-L5-XX8"/>
                             <constraint firstAttribute="leadingMargin" secondItem="BvM-oo-MjU" secondAttribute="leading" id="UZY-bJ-t1M"/>
                             <constraint firstItem="DNm-3L-YeD" firstAttribute="top" secondItem="Qs7-K4-zzX" secondAttribute="bottom" constant="8" id="VvK-wH-6l3"/>
-                            <constraint firstItem="mFq-wF-NO0" firstAttribute="top" secondItem="BvM-oo-MjU" secondAttribute="bottom" constant="8" symbolic="YES" id="Zgz-UL-fRA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BvM-oo-MjU" secondAttribute="trailing" id="fL7-Tc-9FD"/>
-                            <constraint firstItem="mFq-wF-NO0" firstAttribute="centerX" secondItem="BvM-oo-MjU" secondAttribute="centerX" id="k7X-aU-O4G"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="centerX" secondItem="BvM-oo-MjU" secondAttribute="centerX" id="g5x-9D-Sod"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="top" secondItem="BvM-oo-MjU" secondAttribute="bottom" constant="8" symbolic="YES" id="o01-Qm-Lbr"/>
                             <constraint firstItem="BvM-oo-MjU" firstAttribute="top" secondItem="DNm-3L-YeD" secondAttribute="bottom" constant="8" id="xFs-an-PwS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="DNm-3L-YeD" secondAttribute="leading" id="xm8-5d-3ol"/>
+                            <constraint firstItem="mFq-wF-NO0" firstAttribute="leading" secondItem="jFb-c2-HLJ" secondAttribute="leading" id="y6J-aM-e2p"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Novo horário" id="skc-sU-Jsl">
@@ -460,7 +460,7 @@
                         <outlet property="labelName" destination="83x-aC-q57" id="ZnI-mX-SeA"/>
                         <outlet property="textFieldCityState" destination="Gbz-1Z-aSZ" id="si0-a7-WhK"/>
                         <outlet property="textFieldUser" destination="2qU-t9-VU9" id="08Y-DZ-e2P"/>
-                        <outlet property="textFieldVariable" destination="na6-m3-YTh" id="d0D-r5-y5V"/>
+                        <outlet property="textFieldVariable" destination="na6-m3-YTh" id="fdh-AY-DcN"/>
                         <outlet property="uiPickerView" destination="znp-Ca-M4L" id="5vF-f8-8JQ"/>
                         <segue destination="Ewi-oW-2Aw" kind="show" identifier="segueEnterprise" id="2CE-iw-wOe"/>
                         <segue destination="SIq-pE-Pdl" kind="show" identifier="seguePlayer" id="CCu-DG-9iP"/>
@@ -615,10 +615,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Telefone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="po6-Bk-pBe">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Telefone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="po6-Bk-pBe" customClass="AKMaskField" customModule="AKMaskField">
                                 <rect key="frame" x="20" y="224" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mask" value="({dd}) {dddd}-{dddd}"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="maskTemplate" value=" (__) ____-____"/>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pesquise sua cidade/estado" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vyJ-CI-hr8">
                                 <rect key="frame" x="20" y="262" width="560" height="30"/>
@@ -684,7 +688,7 @@
                         <outlet property="email" destination="cbn-kl-XSR" id="XfJ-Lh-Uto"/>
                         <outlet property="nameFull" destination="6Dk-bP-kia" id="Uf8-Xc-Wdb"/>
                         <outlet property="password" destination="dhr-Hz-Szw" id="FeY-Wv-SZt"/>
-                        <outlet property="telephone" destination="po6-Bk-pBe" id="pBi-L5-EUS"/>
+                        <outlet property="telephone" destination="po6-Bk-pBe" id="e65-fy-Hiu"/>
                         <outlet property="user" destination="dKY-pI-Vp8" id="7FK-sT-8Rw"/>
                         <segue destination="AEb-tW-j1z" kind="show" identifier="segueSearchEnterprise" id="K5H-Na-4Dz"/>
                     </connections>
@@ -1361,11 +1365,11 @@
         <image name="logo_100" width="100" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aeD-mj-Vud"/>
-        <segue reference="2CE-iw-wOe"/>
-        <segue reference="M3s-UU-ofB"/>
         <segue reference="CCu-DG-9iP"/>
+        <segue reference="g0h-Vx-GBn"/>
+        <segue reference="2CE-iw-wOe"/>
         <segue reference="WD1-40-foE"/>
+        <segue reference="aeD-mj-Vud"/>
         <segue reference="GuD-Pu-ugf"/>
     </inferredMetricsTieBreakers>
 </document>
