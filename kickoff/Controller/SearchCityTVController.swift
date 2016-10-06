@@ -30,6 +30,7 @@ class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmp
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.title = "Pesquisar"
+        self.tableView.tableFooterView = UIView()
         
         searchBar.delegate = self
         

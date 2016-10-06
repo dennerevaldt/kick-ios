@@ -17,11 +17,14 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
     
     private var isLoading = Bool()
     private var courtsList: Array<Court> = Array<Court>()
-    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     var courtSelected: Court?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
+        customizeDZNEmptyDataSet()
+        isLoading = true
         
         self.tableView.rowHeight = 65.0
         
@@ -30,10 +33,6 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         // Cor tabs
         self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat(76.0/255.0), green: CGFloat(175.0/255.0), blue: CGFloat(80.0/255.0), alpha: CGFloat(1.0))
         
-        
-        tableView.tableFooterView = UIView()
-        customizeDZNEmptyDataSet()
-        isLoading = true
         self.loadList()
         setBackItem()
     }
@@ -195,6 +194,21 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         return true
     }
     
+    // MARK: ActivityIndicatorView Methods
+    func addActivityIndicatorView() -> UIView {
+        let size: CGFloat = 64
+        let x = (self.view.bounds.width - size) / 2
+        let y: CGFloat = 0
+        let loadingView = UIView(frame: CGRect(x: x, y: y, width: size, height: size))
+        let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
+        activityIndicatorView.center = loadingView.center
+        activityIndicatorView.color = UIColor.darkGrayColor()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.startAnimating()
+        loadingView.addSubview(activityIndicatorView)
+        return loadingView
+    }
+    
     // MARK: navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueNewCourt" {
@@ -207,17 +221,6 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
             destination.delegate = self
             destination.court = courtSelected
         }
-    }
-    
-    // MARK: ActivityIndicatorView Methods
-    func addActivityIndicatorView() -> UIView {
-        loading.color = UIColor.grayColor()
-        loading.center = self.view.center
-        self.view.addSubview(loading)
-        loading.bringSubviewToFront(self.view)
-        loading.startAnimating()
-        
-        return loading
     }
     
     // MARK: protocol court

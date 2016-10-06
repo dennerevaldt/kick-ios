@@ -21,6 +21,7 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
         
         labelName.text = KeychainManager.getName()
         labelEmail.text = KeychainManager.getEmail()

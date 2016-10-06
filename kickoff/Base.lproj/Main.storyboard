@@ -1021,9 +1021,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XER-oV-XwA">
-                                <rect key="frame" x="0.0" y="148" width="600" height="125"/>
+                                <rect key="frame" x="0.0" y="148" width="600" height="123"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="mzO-mI-iv4"/>
+                                    <constraint firstAttribute="height" constant="123" id="mzO-mI-iv4"/>
                                 </constraints>
                             </pickerView>
                         </subviews>

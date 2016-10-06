@@ -14,7 +14,7 @@ protocol ScheduleDestinationViewController {
     func setNewSchedule()
 }
 
-class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldDate: UITextField!
     @IBOutlet weak var textFieldHour: UITextField!
@@ -27,6 +27,9 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.textFieldHour.delegate = self
+        self.textFieldDate.delegate = self
         
         self.uiPickerCourts.dataSource = self
         self.uiPickerCourts.delegate = self
@@ -167,5 +170,11 @@ class EnterpriseNewScheduleController: UIViewController, UIPickerViewDelegate, U
                 }
             }
         }
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.textFieldDate.resignFirstResponder()
+        self.textFieldHour.resignFirstResponder()
+        return false
     }
 }

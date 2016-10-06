@@ -17,7 +17,6 @@ import PKHUD
 class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, ScheduleDestinationViewController {
     private var isLoading = Bool()
     private var schedulesList: Array<Schedule> = Array<Schedule>()
-    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     var scheduleSelected:Schedule?
 
     override func viewDidLoad() {
@@ -190,13 +189,17 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
     
     // MARK: ActivityIndicatorView Methods
     func addActivityIndicatorView() -> UIView {
-        loading.color = UIColor.grayColor()
-        loading.center = self.view.center
-        self.view.addSubview(loading)
-        loading.bringSubviewToFront(self.view)
-        loading.startAnimating()
-        
-        return loading
+        let size: CGFloat = 64
+        let x = (self.view.bounds.width - size) / 2
+        let y: CGFloat = 0
+        let loadingView = UIView(frame: CGRect(x: x, y: y, width: size, height: size))
+        let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
+        activityIndicatorView.center = loadingView.center
+        activityIndicatorView.color = UIColor.darkGrayColor()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.startAnimating()
+        loadingView.addSubview(activityIndicatorView)
+        return loadingView
     }
     
     // MARK: navigation

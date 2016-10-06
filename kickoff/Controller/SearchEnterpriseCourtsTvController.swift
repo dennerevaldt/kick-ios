@@ -33,6 +33,7 @@ class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSet
         self.title = "Escolha a empresa"
         self.customizeDZNEmptyDataSet()
         self.startLocManager()
+        self.tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
