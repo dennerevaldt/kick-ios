@@ -31,8 +31,6 @@ class ProfileTableViewController: UITableViewController {
         
         imageExit.image = imageExit.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         imageExit.tintColor = UIColor.lightGrayColor()
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

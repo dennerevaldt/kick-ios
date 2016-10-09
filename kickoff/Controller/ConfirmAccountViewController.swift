@@ -13,6 +13,7 @@ import Alamofire
 import ObjectMapper
 import Locksmith
 import GoogleMaps
+import AKMaskField
 
 class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, DestinationViewController {
     
@@ -25,7 +26,7 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
     @IBOutlet weak var textFieldCityState: UITextField!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var uiPickerView: UIPickerView!
-    @IBOutlet weak var textFieldVariable: UITextField!
+    @IBOutlet weak var textFieldVariable: AKMaskField!
     
     var pickerData: [String] = [String]()
     var placeItemSelected: GMSPlace?
@@ -53,10 +54,7 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
         
         // Init placeholder
         textFieldVariable.placeholder = "Telefone"
-        
-//        field = AKMaskField()
-//        field.mask = "({dd}) {dddd}-{dddd}"
-//        field.maskTemplate = "(__) ____-____"
+        textFieldVariable.setMask("({dd}) {dddd}-{dddd}", withMaskTemplate: "")
         
         setBackItem()
     }
@@ -112,8 +110,11 @@ class ConfirmAccountViewController: UIViewController, UITextFieldDelegate, UIPic
         textFieldVariable.text = ""
         if row == 0 {
             textFieldVariable.placeholder = "Telefone"
+            textFieldVariable.setMask("({dd}) {dddd}-{dddd}", withMaskTemplate: "")
         } else if row == 1 {
-           textFieldVariable.placeholder = "Posição de jogo"
+            textFieldVariable.refreshMask()
+            textFieldVariable.setMask("{DDDDDDDDDDDDDDD}", withMaskTemplate: "               ")
+            textFieldVariable.placeholder = "Posição de jogo"
         }
     }
     

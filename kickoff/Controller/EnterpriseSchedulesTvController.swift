@@ -85,10 +85,6 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-//        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath)
-//        
-//        cell.textLabel?.text = Util.convertDateFormater(schedulesList[indexPath.row].date!)
-//        cell.detailTextLabel?.text = schedulesList[indexPath.row].horary
         let cell = tableView.dequeueReusableCellWithIdentifier("scheduleCell", forIndexPath: indexPath) as! ScheduleCell
         
         cell.dateSchedule.text = Util.convertDateFormater(schedulesList[indexPath.row].date!)
@@ -196,7 +192,6 @@ class EnterpriseSchedulesTvController: UITableViewController, DZNEmptyDataSetSou
         let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
         activityIndicatorView.center = loadingView.center
         activityIndicatorView.color = UIColor.darkGrayColor()
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.startAnimating()
         loadingView.addSubview(activityIndicatorView)
         return loadingView

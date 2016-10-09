@@ -72,11 +72,18 @@ class PlayerNewGameController: UIViewController , UITextFieldDelegate, UIPickerV
         }
     }
     
+    // MARK: Texfields delegate
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textFieldEntepriseCourt == textField {
             self.performSegueWithIdentifier("segueSetEnteprise", sender: self)
             return false
-        }
+        } 
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     

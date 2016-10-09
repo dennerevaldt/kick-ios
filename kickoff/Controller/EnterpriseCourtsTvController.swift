@@ -203,7 +203,6 @@ class EnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource
         let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
         activityIndicatorView.center = loadingView.center
         activityIndicatorView.color = UIColor.darkGrayColor()
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.startAnimating()
         loadingView.addSubview(activityIndicatorView)
         return loadingView

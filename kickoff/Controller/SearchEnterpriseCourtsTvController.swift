@@ -18,7 +18,6 @@ protocol DestSetEnterpriseViewController {
 
 class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, CLLocationManagerDelegate {
     
-    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     private var isLoading = Bool()
     var listEnterprises: Array<Enterprise> = []
     var entepriseSelected: Enterprise?
@@ -152,13 +151,16 @@ class SearchEnterpriseCourtsTvController: UITableViewController, DZNEmptyDataSet
     
     // MARK: ActivityIndicatorView Methods
     func addActivityIndicatorView() -> UIView {
-        loading.color = UIColor.grayColor()
-        loading.center = self.view.center
-        self.view.addSubview(loading)
-        loading.bringSubviewToFront(self.view)
-        loading.startAnimating()
-        
-        return loading
+        let size: CGFloat = 64
+        let x = (self.view.bounds.width - size) / 2
+        let y: CGFloat = 0
+        let loadingView = UIView(frame: CGRect(x: x, y: y, width: size, height: size))
+        let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
+        activityIndicatorView.center = loadingView.center
+        activityIndicatorView.color = UIColor.darkGrayColor()
+        activityIndicatorView.startAnimating()
+        loadingView.addSubview(activityIndicatorView)
+        return loadingView
     }
     
     // MARK: Location

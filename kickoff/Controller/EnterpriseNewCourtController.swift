@@ -14,7 +14,7 @@ protocol CourtDestinationViewController {
     func setNewCourt()
 }
 
-class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldNameCourt: UITextField!
     @IBOutlet weak var pickerViewCategoryCourt: UIPickerView!
@@ -30,6 +30,7 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
         // Connect data:
         self.pickerViewCategoryCourt.delegate = self
         self.pickerViewCategoryCourt.dataSource = self
+        self.textFieldNameCourt.delegate = self
         
         // Input data into the Array:
         pickerData = ["Futebol society (7)", "Futebol de salão (Futsal)"]
@@ -121,5 +122,12 @@ class EnterpriseNewCourtController: UIViewController, UIPickerViewDelegate, UIPi
         } else if row == 1 {
             categoryCourtSelected = "Futebol de salão (Futsal)"
         }
+    }
+    
+    // MARK: Textfield delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

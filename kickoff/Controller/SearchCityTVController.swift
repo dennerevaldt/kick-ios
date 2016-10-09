@@ -17,10 +17,10 @@ protocol DestinationViewController {
 }
 
 class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
     var places: Array<Place> = []
     let placesApi = PlacesApi()
     private var isLoading = Bool()
-    let loading: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectMake(0.0, 0.0, 44, 44), type: .LineScale)
     
     @IBOutlet weak var searchBar: UISearchBar!
     var delegate: DestinationViewController! = nil
@@ -33,7 +33,6 @@ class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmp
         self.tableView.tableFooterView = UIView()
         
         searchBar.delegate = self
-        
         customizeDZNEmptyDataSet()
     }
     
@@ -108,13 +107,16 @@ class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmp
     
     // MARK: ActivityIndicatorView Methods
     func addActivityIndicatorView() -> UIView {
-        loading.color = UIColor.grayColor()
-        loading.center = self.view.center
-        self.view.addSubview(loading)
-        loading.bringSubviewToFront(self.view)
-        loading.startAnimating()
-        
-        return loading
+        let size: CGFloat = 64
+        let x = (self.view.bounds.width - size) / 2
+        let y: CGFloat = 0
+        let loadingView = UIView(frame: CGRect(x: x, y: y, width: size, height: size))
+        let activityIndicatorView = NVActivityIndicatorView(frame: loadingView.frame, type: .LineScale)
+        activityIndicatorView.center = loadingView.center
+        activityIndicatorView.color = UIColor.darkGrayColor()
+        activityIndicatorView.startAnimating()
+        loadingView.addSubview(activityIndicatorView)
+        return loadingView
     }
     
     // MARK: search bar
@@ -156,20 +158,16 @@ class SearchCityTVController: UITableViewController, UISearchBarDelegate, DZNEmp
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return places.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cellCityState", forIndexPath: indexPath)
-
-        // Configure the cell...
         cell.textLabel?.text = self.places[indexPath.row].name
 
         return cell
